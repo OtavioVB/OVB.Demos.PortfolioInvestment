@@ -16,8 +16,8 @@ public readonly struct QuantityAvailableValueObject
         QuantityAvailable = quantityAvailable;
     }
 
-    private const string UNITARY_PRICE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_CODE = "UNITARY_PRICE_CANNOT_BE_LESS_THAN_ZERO";
-    private const string UNITARY_PRICE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_MESSAGE = "O valor unitário do ativo financeiro deve ser maior que zero.";
+    private const string QUANTITY_AVAILABLE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_CODE = "QUANTITY_AVAILABLE_CANNOT_BE_LESS_THAN_ZERO";
+    private const string QUANTITY_AVAILABLE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_MESSAGE = "A quantidade disponível do ativo financeiro deve ser maior que zero.";
 
     public const int MINIMUM_VALUE = 0;
 
@@ -29,8 +29,8 @@ public readonly struct QuantityAvailableValueObject
 
         if (quantityAvailable < MINIMUM_VALUE)
             notifications.Add(Notification.FactoryFailure(
-                code: UNITARY_PRICE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_CODE,
-                message: UNITARY_PRICE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_MESSAGE));
+                code: QUANTITY_AVAILABLE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_CODE,
+                message: QUANTITY_AVAILABLE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_MESSAGE));
 
         if (Notification.HasAnyNotifications(notifications))
             return new QuantityAvailableValueObject(

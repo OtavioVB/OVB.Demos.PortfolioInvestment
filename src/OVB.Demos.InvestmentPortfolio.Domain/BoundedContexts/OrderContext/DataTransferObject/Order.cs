@@ -1,20 +1,22 @@
 ﻿using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.CustomerContext.DataTransferObject;
 using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.FinancialAssetContext.DataTransferObject;
 using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.OrderContext.Enumerators;
+using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 
 namespace OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.OrderContext.DataTransferObject;
 
 public sealed record Order
 {
-    public Guid Id { get; set; }
+    public IdentityValueObject Id { get; set; }
     public DateTime CreatedAt { get; set; }
-    public OrderType Type { get; set; }
-    public OrderStatus Status { get; set; }
-    public decimal Quantity { get; set; }
-    public decimal UnitaryPrice { get; set; }
-    public decimal TotalPrice { get; set; }
+    public OrderTypeValueObject Type { get; set; }
+    public OrderStatusValueObject Status { get; set; }
+    public QuantityValueObject Quantity { get; set; }
+    public UnitaryPriceValueObject UnitaryPrice { get; set; }
+    public TotalPriceValueObject TotalPrice { get; set; }
 
-    public Order(Guid id, DateTime createdAt, OrderType type, OrderStatus status, decimal quantity, decimal unitaryPrice, decimal totalPrice)
+    public Order(IdentityValueObject id, DateTime createdAt, OrderTypeValueObject type, OrderStatusValueObject status,
+        QuantityValueObject quantity, UnitaryPriceValueObject unitaryPrice, TotalPriceValueObject totalPrice)
     {
         Id = id;
         CreatedAt = createdAt;
@@ -25,9 +27,9 @@ public sealed record Order
         TotalPrice = totalPrice;
     }
 
-    public Guid FinancialAssetId { get; set; }
+    public IdentityValueObject FinancialAssetId { get; set; }
     public FinancialAsset? FinancialAsset { get; set; }
 
-    public Guid CustomerId { get; set; }
+    public IdentityValueObject CustomerId { get; set; }
     public Customer? Customer { get; set; }
 }
