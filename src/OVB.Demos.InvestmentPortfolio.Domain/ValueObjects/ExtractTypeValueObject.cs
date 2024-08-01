@@ -50,8 +50,13 @@ public readonly struct ExtractTypeValueObject
         return BusinessValueObjectException.ThrowExceptionIfTheObjectCannotBeNull(ExtractType)!.Value;
     }
 
+    public string GetExtractTypeAsString()
+        => GetExtractType().ToString();
+
     public static implicit operator ExtractType(ExtractTypeValueObject obj)
         => obj.GetExtractType();
+    public static implicit operator string(ExtractTypeValueObject obj)
+        => obj.GetExtractTypeAsString();
     public static implicit operator MethodResult<INotification>(ExtractTypeValueObject obj)
         => obj.MethodResult;
     public static implicit operator ExtractTypeValueObject(string obj)

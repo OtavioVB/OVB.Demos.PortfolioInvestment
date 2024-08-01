@@ -24,7 +24,10 @@ public sealed class DataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfiguration(new OperatorMapping());
+        modelBuilder.ApplyConfiguration(new CustomerMapping());
         modelBuilder.ApplyConfiguration(new FinancialAssetMapping());
+        modelBuilder.ApplyConfiguration(new ExtractMapping());
         base.OnModelCreating(modelBuilder);
     }
 }

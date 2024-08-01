@@ -44,7 +44,7 @@ public sealed class CustomerMapping : IEntityTypeConfiguration<Customer>
         builder.Property(p => p.Id)
             .IsRequired(true)
             .IsFixedLength(true)
-            .HasColumnType("VARCHAR")
+            .HasColumnType("CHAR")
             .HasColumnName("idcustomer")
             .HasMaxLength(Guid.Empty.ToString().Length)
             .HasConversion(p => p.GetIdentityAsString(), p => IdentityValueObject.Factory(Guid.Parse(p)))

@@ -24,9 +24,9 @@ public sealed record Extract
         Quantity = quantity;
     }
 
-    public Guid CustomerId { get; set; }
+    public IdentityValueObject CustomerId { get; set; }
     public Customer? Customer { get; set; }
 
-    public Guid FinancialAssetId { get; set; }
+    public IdentityValueObject FinancialAssetId { get; set; }
     public FinancialAsset? FinancialAsset { get; set; }
 }
