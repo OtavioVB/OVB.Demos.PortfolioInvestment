@@ -55,7 +55,7 @@ public sealed class FinancialAssertDataTransferObjectValidationTests
         Assert.Equal(expirationDateConvert, financialAsset.ExpirationDate);
         Assert.Equal(index, financialAsset.Index.GetIndex());
         Assert.Equal(status, financialAsset.Status.GetStatus());
-        Assert.Equal(type, financialAsset.Type.GetType());
+        Assert.Equal(type, financialAsset.Type.GetAssetType());
         Assert.Equal(interestRate, financialAsset.InterestRate.GetInterestRate());
         Assert.Equal(unitaryPrice, financialAsset.UnitaryPrice.GetUnitaryPrice());
         Assert.Equal(quantityAvailable, financialAsset.QuantityAvailable.GetQuantityAvailable());

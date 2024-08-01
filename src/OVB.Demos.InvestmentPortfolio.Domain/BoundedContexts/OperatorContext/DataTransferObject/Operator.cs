@@ -9,11 +9,11 @@ public sealed record Operator
     public CodeValueObject Code { get; set; }
     public NameValueObject Name { get; set; }
     public EmailValueObject Email { get; set; }
-    public string PasswordHash { get; set; }
+    public PasswordValueObject PasswordHash { get; set; }
     public string Salt { get; set; }
     public DocumentValueObject Document { get; set; }
 
-    public Operator(IdentityValueObject id, CodeValueObject code, NameValueObject name, EmailValueObject email, string passwordHash, string salt, DocumentValueObject document)
+    public Operator(IdentityValueObject id, CodeValueObject code, NameValueObject name, EmailValueObject email, PasswordValueObject passwordHash, string salt, DocumentValueObject document)
     {
         Id = id;
         Code = code;

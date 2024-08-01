@@ -46,7 +46,7 @@ public readonly struct AssetTypeValueObject
             type: typeConverted);
     }
 
-    public FinancialAssetType GetType()
+    public FinancialAssetType GetAssetType()
     {
         BusinessValueObjectException.ThrowExceptionMethodResultIsError(MethodResult);
 
@@ -54,7 +54,7 @@ public readonly struct AssetTypeValueObject
     }
 
     public string GetTypeAsString()
-        => GetType().ToString();
+        => GetAssetType().ToString();
 
     public static implicit operator AssetTypeValueObject(FinancialAssetType obj)
         => Factory(obj.ToString());
@@ -63,7 +63,7 @@ public readonly struct AssetTypeValueObject
     public static implicit operator string(AssetTypeValueObject obj)
         => obj.GetTypeAsString();
     public static implicit operator FinancialAssetType(AssetTypeValueObject obj)
-        => obj.GetType();
+        => obj.GetAssetType();
     public static implicit operator MethodResult<INotification>(AssetTypeValueObject obj)
         => obj.MethodResult;
 }

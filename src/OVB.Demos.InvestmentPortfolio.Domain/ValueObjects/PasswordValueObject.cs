@@ -117,9 +117,9 @@ public readonly struct PasswordValueObject
         return BusinessValueObjectException.ThrowExceptionIfTheObjectCannotBeNull(Password);
     }
 
-    public string GetPasswordHash(string privateKey)
+    public (string PasswordHash, string Salt) GetPasswordHashAndSalt(string privateKey, string? alreadyDefinedSalt = null)
     {
-        var salt = GenerateSalt();
+        var salt = alreadyDefinedSalt ?? GenerateSalt();
         var password = GetPassword();
         var key = GetPrivateKey(privateKey);
 
@@ -136,7 +136,7 @@ public readonly struct PasswordValueObject
         foreach (var byteAssociated in computedHash)
             stringBuilder.AppendFormat(HEXADECIMAL_APPEND_FORMAT_MODE, byteAssociated);
 
-        return stringBuilder.ToString();
+        return (stringBuilder.ToString(), salt);
     }
 
     private byte[] GetPrivateKey(string privateKey)

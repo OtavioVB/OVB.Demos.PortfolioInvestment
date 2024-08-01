@@ -1,4 +1,5 @@
 ﻿using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.OperatorContext.DataTransferObject;
+using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 
 namespace OVB.Demos.InvestmentPortfolio.UnitTests.Domain.OperatorContext;
 
@@ -9,7 +10,7 @@ public sealed class OperatorDataTransferObjectValidationTests
             code: "OPT09FADLKJ",
             name: "Otávio Carmanini",
             email: "otaviovb.developer@gmail.com",
-            passwordHash: "123456789**&",
+            passwordHash: PasswordValueObject.Factory("123456789**&"),
             salt: "82J2347KHA4K",
             document: "00000000000");
 
@@ -26,7 +27,7 @@ public sealed class OperatorDataTransferObjectValidationTests
             code: code,
             name: name,
             email: email,
-            passwordHash: password,
+            passwordHash: PasswordValueObject.Factory(password),
             salt: salt,
             document: document);
 
@@ -35,7 +36,6 @@ public sealed class OperatorDataTransferObjectValidationTests
         Assert.Equal(code, portfolioOperator.Code);
         Assert.Equal(name, portfolioOperator.Name);
         Assert.Equal(email, portfolioOperator.Email);
-        Assert.Equal(password, portfolioOperator.PasswordHash);
         Assert.Equal(document, portfolioOperator.Document);
     }
 }
