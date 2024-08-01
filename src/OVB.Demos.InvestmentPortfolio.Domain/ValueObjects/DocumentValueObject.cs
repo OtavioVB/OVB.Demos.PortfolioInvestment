@@ -22,7 +22,7 @@ public readonly struct DocumentValueObject
     public const int CPF_DOCUMENT_REQUIRED_LENGTH = 11;
     public const int CNPJ_DOCUMENT_REQUIRED_LENGTH = 14;
 
-    private const string DOCUMENT_LENGTH_NEED_TO_VALID_NOTIFICATION_CODE = "DOCUMENT_LENGTH_NEED_TO_VALID";
+    private const string DOCUMENT_LENGTH_NEED_TO_VALID_NOTIFICATION_CODE = "DOCUMENT_LENGTH_NEED_TO_BE_VALID";
     private static string DOCUMENT_LENGTH_NEED_TO_VALID_NOTIFICATION_MESSAGE => $"O documento deve conter {CPF_DOCUMENT_REQUIRED_LENGTH} dígitos para Pessoa Física ou {CNPJ_DOCUMENT_REQUIRED_LENGTH} dígitos para Pessoa Jurídica.";
 
     private const string DOCUMENT_MUST_BE_VALID_NOTIFICATION_CODE = "DOCUMENT_MUST_BE_VALID";
