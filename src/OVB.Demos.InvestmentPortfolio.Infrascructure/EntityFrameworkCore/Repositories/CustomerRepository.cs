@@ -12,5 +12,5 @@ public sealed class CustomerRepository : BaseRepository<Customer>, IExtensionCus
     }
 
     public override Task<Customer?> GetEntityByIdAsync(Guid id, CancellationToken cancellationToken)
-        => _dataContext.Set<Customer>().Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
+        => _dataContext.Set<Customer>().Where(p => p.Id.GetIdentity() == id).FirstOrDefaultAsync(cancellationToken);
 }

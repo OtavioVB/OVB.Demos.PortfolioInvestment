@@ -12,5 +12,5 @@ public sealed class OperatorRepository : BaseRepository<Operator>, IExtensionOpe
     }
 
     public override Task<Operator?> GetEntityByIdAsync(Guid id, CancellationToken cancellationToken)
-        => _dataContext.Set<Operator>().Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
+        => _dataContext.Set<Operator>().Where(p => p.Id.GetIdentity() == id).FirstOrDefaultAsync(cancellationToken);
 }

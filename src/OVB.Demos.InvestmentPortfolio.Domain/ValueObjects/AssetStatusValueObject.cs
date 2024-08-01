@@ -56,6 +56,10 @@ public readonly struct AssetStatusValueObject
     public string GetStatusAsString()
         => GetStatus().ToString();
 
+    public static implicit operator AssetStatusValueObject(FinancialAssetStatus obj)
+        => Factory(obj.ToString());
+    public static implicit operator AssetStatusValueObject(string obj)
+        => Factory(obj);
     public static implicit operator string(AssetStatusValueObject obj)
         => obj.GetStatusAsString();
     public static implicit operator FinancialAssetStatus(AssetStatusValueObject obj)

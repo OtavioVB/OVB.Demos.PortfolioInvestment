@@ -56,6 +56,10 @@ public readonly struct AssetIndexValueObject
     public string GetIndexAsString()
         => GetIndex().ToString();
 
+    public static implicit operator AssetIndexValueObject(FinancialAssetIndex obj)
+        => Factory(obj.ToString());
+    public static implicit operator AssetIndexValueObject(string obj)
+        => Factory(obj);
     public static implicit operator string(AssetIndexValueObject obj)
         => obj.GetIndexAsString();
     public static implicit operator FinancialAssetIndex(AssetIndexValueObject obj)

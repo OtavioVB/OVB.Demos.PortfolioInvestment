@@ -56,6 +56,10 @@ public readonly struct AssetTypeValueObject
     public string GetTypeAsString()
         => GetType().ToString();
 
+    public static implicit operator AssetTypeValueObject(FinancialAssetType obj)
+        => Factory(obj.ToString());
+    public static implicit operator AssetTypeValueObject(string obj)
+        => Factory(obj);
     public static implicit operator string(AssetTypeValueObject obj)
         => obj.GetTypeAsString();
     public static implicit operator FinancialAssetType(AssetTypeValueObject obj)

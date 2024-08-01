@@ -1,17 +1,18 @@
 ﻿using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.FinancialAssetContext.DataTransferObject;
+using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 
 namespace OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.OperatorContext.DataTransferObject;
 
 public sealed record Operator
 {
-    public Guid Id { get; set; }
-    public string Code { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
+    public IdentityValueObject Id { get; set; }
+    public CodeValueObject Code { get; set; }
+    public NameValueObject Name { get; set; }
+    public EmailValueObject Email { get; set; }
     public string Password { get; set; }
-    public string Document { get; set; }
+    public DocumentValueObject Document { get; set; }
 
-    public Operator(Guid id, string code, string name, string email, string password, string document)
+    public Operator(IdentityValueObject id, CodeValueObject code, NameValueObject name, EmailValueObject email, string password, DocumentValueObject document)
     {
         Id = id;
         Code = code;

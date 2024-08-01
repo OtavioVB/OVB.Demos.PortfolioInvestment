@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\FinancialAssetContext\Inputs\" />
     <Folder Include="Services\FinancialAssetContext\Interfaces\" />
     <Folder Include="Services\FinancialAssetContext\Outputs\" />
     <Folder Include="UseCases\" />
