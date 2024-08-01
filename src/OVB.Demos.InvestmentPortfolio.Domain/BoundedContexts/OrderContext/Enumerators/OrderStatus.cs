@@ -2,7 +2,7 @@
 
 public enum OrderStatus
 {
-    AGUARDANDO = 1,
-    EXECUTADA = 2,
-    REJEITADA = 3,
+    WAITING = 1,
+    EXECUTED = 2,
+    REJECTED = 3,
 }

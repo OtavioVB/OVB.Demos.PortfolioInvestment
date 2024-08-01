@@ -10,8 +10,8 @@ public sealed class OrderDataTransferObjectValidationTests
     public static Order ORDER_EXAMPLE = new Order(
         id: Guid.NewGuid(),
         createdAt: DateTime.Parse("2024-07-31T09:48:45Z"),
-        type: OrderType.COMPRA,
-        status: OrderStatus.EXECUTADA,
+        type: OrderType.BUY,
+        status: OrderStatus.EXECUTED,
         quantity: 3,
         unitaryPrice: 5,
         totalPrice: 15)
@@ -21,7 +21,7 @@ public sealed class OrderDataTransferObjectValidationTests
     };
 
     [Theory]
-    [InlineData("2024-07-31T09:48:45Z", OrderType.COMPRA, OrderStatus.EXECUTADA, 3, 5, 15)]
+    [InlineData("2024-07-31T09:48:45Z", OrderType.BUY, OrderStatus.EXECUTED, 3, 5, 15)]
     public void Order_Data_Transfer_Object_Should_Be_Equal_Expected(string createdAt, OrderType type, OrderStatus status, decimal quantity, decimal unitaryPrice, decimal totalPrice)
     {
         // Arrange

@@ -14,8 +14,8 @@ public sealed class FinancialAssertDataTransferObjectValidationTests
         description: "Certificado de Depósito Bancário",
         expirationDate: DateTime.Parse("2100-07-31"),
         index: FinancialAssetIndex.CDI,
-        type: FinancialAssetType.PRE_FIXADO,
-        status: FinancialAssetStatus.ATIVO,
+        type: FinancialAssetType.PRE_FIXED,
+        status: FinancialAssetStatus.ACTIVE,
         interestRate: 2.75m,
         unitaryPrice: 50,
         quantityAvailable: 575)
@@ -24,7 +24,7 @@ public sealed class FinancialAssertDataTransferObjectValidationTests
     };
 
     [Theory]
-    [InlineData("CDB", "Certificado de Depósito Bancário", "2100-07-31", FinancialAssetIndex.CDI, FinancialAssetStatus.ATIVO, FinancialAssetType.PRE_FIXADO,
+    [InlineData("CDB", "Certificado de Depósito Bancário", "2100-07-31", FinancialAssetIndex.CDI, FinancialAssetStatus.ACTIVE, FinancialAssetType.PRE_FIXED,
         2.75, 50.00, 525.984)]
     public void Financial_Assert_Data_Transfer_Object_Should_Be_Equal_Expected(string symbol, string? description,
         string expirationDate, FinancialAssetIndex index, FinancialAssetStatus status, FinancialAssetType type,

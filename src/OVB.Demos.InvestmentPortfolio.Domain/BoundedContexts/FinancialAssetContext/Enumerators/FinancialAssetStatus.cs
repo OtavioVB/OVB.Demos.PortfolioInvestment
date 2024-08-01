@@ -2,6 +2,6 @@
 
 public enum FinancialAssetStatus
 {
-    ATIVO = 1,
-    INATIVO = 2,
+    ACTIVE = 1,
+    INACTIVE = 2,
 }

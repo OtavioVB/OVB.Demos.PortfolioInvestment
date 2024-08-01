@@ -2,6 +2,6 @@
 
 public enum FinancialAssetType
 {
-    POS_FIXADO = 1,
-    PRE_FIXADO = 2,
+    POS_FIXED = 1,
+    PRE_FIXED = 2,
 }

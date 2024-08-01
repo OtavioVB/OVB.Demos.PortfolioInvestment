@@ -2,6 +2,6 @@
 
 public enum ExtractType
 {
-    COMPRA = 1,
-    VENDA = 2,
+    BUY = 1,
+    SELL = 2,
 }
