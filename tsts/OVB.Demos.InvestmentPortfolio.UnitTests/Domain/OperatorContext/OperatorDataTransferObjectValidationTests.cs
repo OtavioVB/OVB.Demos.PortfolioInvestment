@@ -10,7 +10,7 @@ public sealed class OperatorDataTransferObjectValidationTests
             code: "OPT09FADLKJ",
             name: "Otávio Carmanini",
             email: "otaviovb.developer@gmail.com",
-            passwordHash: PasswordValueObject.Factory("123456789**&"),
+            passwordHash: "123456789**&",
             salt: "82J2347KHA4K",
             document: "00000000000");
 
@@ -27,7 +27,7 @@ public sealed class OperatorDataTransferObjectValidationTests
             code: code,
             name: name,
             email: email,
-            passwordHash: PasswordValueObject.Factory(password),
+            passwordHash: password,
             salt: salt,
             document: document);
 
@@ -36,6 +36,8 @@ public sealed class OperatorDataTransferObjectValidationTests
         Assert.Equal(code, portfolioOperator.Code);
         Assert.Equal(name, portfolioOperator.Name);
         Assert.Equal(email, portfolioOperator.Email);
+        Assert.Equal(password, portfolioOperator.PasswordHash);
+        Assert.Equal(salt, portfolioOperator.Salt);
         Assert.Equal(document, portfolioOperator.Document);
     }
 }
