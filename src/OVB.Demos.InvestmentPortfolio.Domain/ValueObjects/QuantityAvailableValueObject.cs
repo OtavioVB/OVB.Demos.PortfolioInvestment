@@ -27,7 +27,7 @@ public readonly struct QuantityAvailableValueObject
 
         var notifications = new List<INotification>(CAPACITY_NOTIFICATIONS_POSSIBLE);
 
-        if (quantityAvailable < MINIMUM_VALUE)
+        if (quantityAvailable <= MINIMUM_VALUE)
             notifications.Add(Notification.FactoryFailure(
                 code: QUANTITY_AVAILABLE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_CODE,
                 message: QUANTITY_AVAILABLE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_MESSAGE));

@@ -27,7 +27,7 @@ public readonly struct UnitaryPriceValueObject
 
         var notifications = new List<INotification>(CAPACITY_NOTIFICATIONS_POSSIBLE);
 
-        if (unitaryPrice < MINIMUM_VALUE)
+        if (unitaryPrice <= MINIMUM_VALUE)
             notifications.Add(Notification.FactoryFailure(
                 code: UNITARY_PRICE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_CODE,
                 message: UNITARY_PRICE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_MESSAGE));

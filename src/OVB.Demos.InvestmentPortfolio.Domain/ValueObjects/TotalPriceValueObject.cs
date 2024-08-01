@@ -27,7 +27,7 @@ public readonly struct TotalPriceValueObject
 
         var notifications = new List<INotification>(CAPACITY_NOTIFICATIONS_POSSIBLE);
 
-        if (totalPrice < MINIMUM_VALUE)
+        if (totalPrice <= MINIMUM_VALUE)
             notifications.Add(Notification.FactoryFailure(
                 code: TOTAL_PRICE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_CODE,
                 message: TOTAL_PRICE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_MESSAGE));
