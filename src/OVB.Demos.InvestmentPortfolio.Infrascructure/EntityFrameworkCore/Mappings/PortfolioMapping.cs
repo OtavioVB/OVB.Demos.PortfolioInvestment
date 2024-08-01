@@ -1,43 +1,42 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.OrderContext.DataTransferObject;
+using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.PortfolioContext.DataTransferObject;
 using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 
 namespace OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Mappings;
 
-public sealed class OrderMapping : IEntityTypeConfiguration<Order>
+public sealed class PortfolioMapping : IEntityTypeConfiguration<Portfolio>
 {
-    public void Configure(EntityTypeBuilder<Order> builder)
+    public void Configure(EntityTypeBuilder<Portfolio> builder)
     {
         #region Table Configuration
 
         builder.ToTable(
-            name: "orders",
-            schema: "order");
+            name: "portfolios",
+            schema: "portfolio");
 
         #endregion
 
         #region Primary Key Configuration
 
         builder.HasKey(p => p.Id)
-            .HasName("pk_order_id");
+            .HasName("pk_portfolio_id");
 
         #endregion
 
         #region Foreign Key Configuration
 
         builder.HasOne(p => p.FinancialAsset)
-            .WithMany(p => p.Orders)
+            .WithMany(p => p.Portfolios)
             .HasForeignKey(p => p.FinancialAssetId)
             .HasPrincipalKey(p => p.Id)
-            .HasConstraintName("fk_1_financial_asset_n_orders")
+            .HasConstraintName("fk_1_financial_asset_n_portfolios")
             .IsRequired(true);
-
         builder.HasOne(p => p.Customer)
-            .WithMany(p => p.Orders)
+            .WithMany(p => p.Portfolios)
             .HasForeignKey(p => p.CustomerId)
             .HasPrincipalKey(p => p.Id)
-            .HasConstraintName("fk_1_customer_n_orders")
+            .HasConstraintName("fk_1_customer_n_portfolios")
             .IsRequired(true);
 
         #endregion
@@ -46,7 +45,7 @@ public sealed class OrderMapping : IEntityTypeConfiguration<Order>
 
         builder.HasIndex(p => p.Id)
             .IsUnique(true)
-            .HasDatabaseName("uk_order_id");
+            .HasDatabaseName("uk_portfolio_id");
 
         #endregion
 
@@ -56,7 +55,7 @@ public sealed class OrderMapping : IEntityTypeConfiguration<Order>
             .IsRequired(true)
             .IsFixedLength(true)
             .HasColumnType("CHAR")
-            .HasColumnName("idorder")
+            .HasColumnName("idportfolio")
             .HasMaxLength(Guid.Empty.ToString().Length)
             .HasConversion(p => p.GetIdentityAsString(), p => IdentityValueObject.Factory(Guid.Parse(p)))
             .ValueGeneratedNever();
@@ -75,36 +74,6 @@ public sealed class OrderMapping : IEntityTypeConfiguration<Order>
             .HasColumnName("financial_asset_id")
             .HasMaxLength(Guid.Empty.ToString().Length)
             .HasConversion(p => p.GetIdentityAsString(), p => IdentityValueObject.Factory(Guid.Parse(p)))
-            .ValueGeneratedNever();
-
-        builder.Property(p => p.CreatedAt)
-            .IsRequired(true)
-            .IsFixedLength(false)
-            .HasColumnType("TIMESTAMPTZ")
-            .HasColumnName("created_at")
-            .ValueGeneratedNever();
-        builder.Property(p => p.Type)
-            .IsRequired(true)
-            .IsFixedLength(false)
-            .HasColumnType("VARCHAR")
-            .HasColumnName("type")
-            .HasMaxLength(255)
-            .HasConversion(p => p.GetOrderTypeAsString(), p => OrderTypeValueObject.Factory(p))
-            .ValueGeneratedNever();
-        builder.Property(p => p.Status)
-            .IsRequired(true)
-            .IsFixedLength(false)
-            .HasColumnType("VARCHAR")
-            .HasColumnName("status")
-            .HasMaxLength(255)
-            .HasConversion(p => p.GetOrderStatusAsString(), p => OrderStatusValueObject.Factory(p))
-            .ValueGeneratedNever();
-        builder.Property(p => p.UnitaryPrice)
-            .IsRequired(true)
-            .IsFixedLength(false)
-            .HasColumnType("DECIMAL(10, 5)")
-            .HasColumnName("unitary_price")
-            .HasConversion(p => p.GetUnitaryPrice(), p => UnitaryPriceValueObject.Factory(p))
             .ValueGeneratedNever();
         builder.Property(p => p.TotalPrice)
             .IsRequired(true)

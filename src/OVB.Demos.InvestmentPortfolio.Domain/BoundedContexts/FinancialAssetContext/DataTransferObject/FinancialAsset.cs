@@ -2,6 +2,7 @@
 using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.FinancialAssetContext.Enumerators;
 using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.OperatorContext.DataTransferObject;
 using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.OrderContext.DataTransferObject;
+using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.PortfolioContext.DataTransferObject;
 using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 
 namespace OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.FinancialAssetContext.DataTransferObject;
@@ -41,4 +42,5 @@ public sealed record FinancialAsset
 
     public IList<Order>? Orders { get; set; }
     public IList<Extract>? Extracts { get; set; }
+    public IList<Portfolio>? Portfolios { get; set; }
 }

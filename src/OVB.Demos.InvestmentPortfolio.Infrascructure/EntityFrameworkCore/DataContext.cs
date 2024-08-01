@@ -29,6 +29,7 @@ public sealed class DataContext : DbContext
         modelBuilder.ApplyConfiguration(new FinancialAssetMapping());
         modelBuilder.ApplyConfiguration(new ExtractMapping());
         modelBuilder.ApplyConfiguration(new OrderMapping());
+        modelBuilder.ApplyConfiguration(new PortfolioMapping());
         base.OnModelCreating(modelBuilder);
     }
 }

@@ -9,14 +9,12 @@ public sealed record Portfolio
     public IdentityValueObject Id { get; set; }
     public TotalPriceValueObject TotalPrice { get; set; }
     public QuantityValueObject Quantity { get; set; }
-    public decimal ProftAndLoss { get; set; }
 
-    public Portfolio(IdentityValueObject id, TotalPriceValueObject totalPrice, QuantityValueObject quantity, decimal proftAndLoss)
+    public Portfolio(IdentityValueObject id, TotalPriceValueObject totalPrice, QuantityValueObject quantity)
     {
         Id = id;
         TotalPrice = totalPrice;
         Quantity = quantity;
-        ProftAndLoss = proftAndLoss;
     }
 
     public IdentityValueObject FinancialAssetId { get; set; }
