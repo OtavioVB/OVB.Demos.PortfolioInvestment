@@ -7,8 +7,8 @@ namespace OVB.Demos.InvestmentPortfolio.UnitTests.Domain.PortfolioContext;
 public sealed class PortfolioDataTransferObjectValidationTests
 {
     [Theory]
-    [InlineData(15, 3, 1.5)]
-    public void Portfolio_Data_Transfer_Object_Should_Be_Equal_Expected(decimal totalPrice, decimal quantity, decimal proftAndLoss)
+    [InlineData(15, 3)]
+    public void Portfolio_Data_Transfer_Object_Should_Be_Equal_Expected(decimal totalPrice, decimal quantity)
     {
         // Arrange
         var portfolioId = Guid.NewGuid();
@@ -17,8 +17,7 @@ public sealed class PortfolioDataTransferObjectValidationTests
         var portfolio = new Portfolio(
             id: portfolioId,
             totalPrice: totalPrice,
-            quantity: quantity,
-            proftAndLoss: proftAndLoss)
+            quantity: quantity)
         {
             Customer = CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE,
             FinancialAsset = FinancialAssertDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE
@@ -26,9 +25,8 @@ public sealed class PortfolioDataTransferObjectValidationTests
 
         // Assert
         Assert.Equal(portfolioId, portfolio.Id);
-        Assert.Equal(totalPrice, portfolio.TotalPrice);
-        Assert.Equal(quantity, portfolio.Quantity);
-        Assert.Equal(proftAndLoss, portfolio.ProftAndLoss);
+        Assert.Equal(totalPrice, portfolio.TotalPrice.GetTotalPrice());
+        Assert.Equal(quantity, portfolio.Quantity.GetQuantity());
         Assert.Equal(CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE, portfolio.Customer);
         Assert.Equal(FinancialAssertDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE, portfolio.FinancialAsset);
     }

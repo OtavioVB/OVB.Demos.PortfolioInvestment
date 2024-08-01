@@ -10,7 +10,7 @@ public sealed class ExtractDataTransferObjectValidationTests
     public static Extract EXTRACT_EXAMPLE = new Extract(
         id: Guid.NewGuid(),
         createdAt: DateTime.Parse("2024-07-31T09:42:37Z"),
-        type: ExtractType.VENDA,
+        type: ExtractType.SELL,
         totalPrice: 15,
         unitaryPrice: 5,
         quantity: 3)
@@ -20,7 +20,7 @@ public sealed class ExtractDataTransferObjectValidationTests
     };
     
     [Theory]
-    [InlineData("2024-07-31T09:42:37Z", ExtractType.COMPRA, 15, 5, 3)]
+    [InlineData("2024-07-31T09:42:37Z", ExtractType.BUY, 15, 5, 3)]
     public void Extract_Data_Transfer_Object_Should_Be_Equal_Expected(string extractDate, ExtractType type, decimal totalPrice, decimal unitaryPrice, decimal quantity)
     {
         // Arrange
@@ -41,10 +41,10 @@ public sealed class ExtractDataTransferObjectValidationTests
         // Assert
         Assert.Equal(extractId, extract.Id);
         Assert.Equal(extractAt, extract.CreatedAt);
-        Assert.Equal(type, extract.Type);
-        Assert.Equal(totalPrice, extract.TotalPrice);
-        Assert.Equal(unitaryPrice, extract.UnitaryPrice);
-        Assert.Equal(quantity, extract.Quantity);
+        Assert.Equal(type, extract.Type.GetExtractType());
+        Assert.Equal(totalPrice, extract.TotalPrice.GetTotalPrice());
+        Assert.Equal(unitaryPrice, extract.UnitaryPrice.GetUnitaryPrice());
+        Assert.Equal(quantity, extract.Quantity.GetQuantityAvailable());
         Assert.Equal(CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE, extract.Customer);
         Assert.Equal(FinancialAssertDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE, extract.FinancialAsset);
     }

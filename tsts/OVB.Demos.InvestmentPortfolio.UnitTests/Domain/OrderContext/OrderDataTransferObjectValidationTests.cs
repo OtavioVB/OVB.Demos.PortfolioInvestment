@@ -45,11 +45,11 @@ public sealed class OrderDataTransferObjectValidationTests
         // Assert
         Assert.Equal(orderId, order.Id);
         Assert.Equal(createdAtDate, order.CreatedAt);
-        Assert.Equal(type, order.Type);
-        Assert.Equal(status, order.Status);
-        Assert.Equal(quantity, order.Quantity);
-        Assert.Equal(unitaryPrice, order.UnitaryPrice);
-        Assert.Equal(totalPrice, order.TotalPrice);
+        Assert.Equal(type, order.Type.GetOrderType());
+        Assert.Equal(status, order.Status.GetOrderStatus());
+        Assert.Equal(quantity, order.Quantity.GetQuantity());
+        Assert.Equal(unitaryPrice, order.UnitaryPrice.GetUnitaryPrice());
+        Assert.Equal(totalPrice, order.TotalPrice.GetTotalPrice());
         Assert.Equal(FinancialAssertDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE, order.FinancialAsset);
         Assert.Equal(CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE, order.Customer);
     }

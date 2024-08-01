@@ -12,5 +12,5 @@ public sealed class PortfolioRepository : BaseRepository<Portfolio>, IExtensionP
     }
 
     public override Task<Portfolio?> GetEntityByIdAsync(Guid id, CancellationToken cancellationToken)
-        => _dataContext.Set<Portfolio>().Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
+        => _dataContext.Set<Portfolio>().Where(p => p.Id.GetIdentity() == id).FirstOrDefaultAsync(cancellationToken);
 }
