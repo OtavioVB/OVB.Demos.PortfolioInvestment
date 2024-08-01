@@ -27,7 +27,7 @@ public readonly struct InterestRateValueObject
 
         var notifications = new List<INotification>(CAPACITY_NOTIFICATIONS_POSSIBLE);
 
-        if (interestRate < MINIMUM_VALUE)
+        if (interestRate <= MINIMUM_VALUE)
             notifications.Add(Notification.FactoryFailure(
                 code: INTEREST_RATE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_CODE,
                 message: INTEREST_RATE_CANNOT_BE_LESS_THAN_ZERO_NOTIFICATION_MESSAGE));

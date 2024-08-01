@@ -20,6 +20,7 @@ public sealed class ExtractTypeValueObjcetValidationTests
         // Assert
         Assert.True(extractTypeValueObject.MethodResult.IsSuccess);
         Assert.Equal(EXTRACT_TYPE_ENUMERATOR_EXPECTED, extractTypeValueObject.GetExtractType());
+        Assert.Equal<ExtractType>(EXTRACT_TYPE_ENUMERATOR_EXPECTED, extractTypeValueObject);
         Assert.Equal(extractType, extractTypeValueObject.GetExtractTypeAsString());
     }
 

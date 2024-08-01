@@ -25,6 +25,7 @@ public sealed class DocumentValueObjectValidationTests
         // Assert
         Assert.True(documentValueObject.MethodResult.IsSuccess);
         Assert.Equal(document, documentValueObject.GetDocument());
+        Assert.Equal(document, documentValueObject);
         Assert.Equal(EXPECTED_PERSON_CLASSIFICATION, documentValueObject.GetPersonClassification());
     }
 

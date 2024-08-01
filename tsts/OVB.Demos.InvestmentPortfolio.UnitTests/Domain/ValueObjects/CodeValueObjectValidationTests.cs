@@ -19,6 +19,7 @@ public sealed class CodeValueObjectValidationTests
         // Assert
         Assert.True(codeValueObject.MethodResult.IsSuccess);
         Assert.Equal(code, codeValueObject.GetCode());
+        Assert.Equal(code, codeValueObject);
     }
 
     [Theory]

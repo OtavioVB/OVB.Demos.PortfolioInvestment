@@ -21,6 +21,7 @@ public sealed class EmailValueObjectValidationTests
         // Assert
         Assert.True(emailValueObject.MethodResult.IsSuccess);
         Assert.Equal(email, emailValueObject.GetEmail());
+        Assert.Equal(email, emailValueObject);
     }
 
     [Theory]
