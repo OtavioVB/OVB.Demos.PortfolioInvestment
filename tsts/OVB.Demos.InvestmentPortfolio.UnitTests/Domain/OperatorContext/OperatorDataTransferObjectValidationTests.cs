@@ -9,12 +9,13 @@ public sealed class OperatorDataTransferObjectValidationTests
             code: "OPT09FADLKJ",
             name: "Otávio Carmanini",
             email: "otaviovb.developer@gmail.com",
-            password: "123456789**&",
+            passwordHash: "123456789**&",
+            salt: "82J2347KHA4K",
             document: "00000000000");
 
     [Theory]
-    [InlineData("OPT34DJXNHA4", "Otávio Carmanini", "54627477805", "otaviovb.developer@gmail.com", "123456789**&")]
-    public void Operator_Data_Transfer_Object_Should_Be_Equal_Expected(string code, string name, string document, string email, string password)
+    [InlineData("OPT34DJXNHA4", "Otávio Carmanini", "54627477805", "otaviovb.developer@gmail.com", "82J2347KHA4K", "123456789**&")]
+    public void Operator_Data_Transfer_Object_Should_Be_Equal_Expected(string code, string name, string document, string email, string salt, string password)
     {
         // Arrange
         var uuidGenerated = Guid.NewGuid();
@@ -25,7 +26,8 @@ public sealed class OperatorDataTransferObjectValidationTests
             code: code,
             name: name,
             email: email,
-            password: password,
+            passwordHash: password,
+            salt: salt,
             document: document);
 
         // Assert
@@ -33,7 +35,7 @@ public sealed class OperatorDataTransferObjectValidationTests
         Assert.Equal(code, portfolioOperator.Code);
         Assert.Equal(name, portfolioOperator.Name);
         Assert.Equal(email, portfolioOperator.Email);
-        Assert.Equal(password, portfolioOperator.Password);
+        Assert.Equal(password, portfolioOperator.PasswordHash);
         Assert.Equal(document, portfolioOperator.Document);
     }
 }
