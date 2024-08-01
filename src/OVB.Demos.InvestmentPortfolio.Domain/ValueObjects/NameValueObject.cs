@@ -2,6 +2,7 @@
 using OVB.Demos.InvestmentPortfolio.Domain.Utils.NotificationContext;
 using OVB.Demos.InvestmentPortfolio.Domain.Utils.NotificationContext.Interfaces;
 using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects.Exceptions;
+using System.Globalization;
 
 namespace OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 
@@ -19,10 +20,10 @@ public readonly struct NameValueObject
     public const int MAX_LENGTH = 64;
 
     private const string NAME_CANNOT_BE_EMPTY_OR_WHITESPACE_NOTIFICATION_CODE = "NAME_CANNOT_BE_EMPTY_OR_WHITESPACE";
-    private const string NAME_CANNOT_BE_EMPTY_OR_WHITESPACE_NOTIFICATION_MESSAGE = "O nome completo não pode ser vazio ou conter apenas espaços em branco.";
+    private const string NAME_CANNOT_BE_EMPTY_OR_WHITESPACE_NOTIFICATION_MESSAGE = "O nome legal não pode ser vazio ou conter apenas espaços em branco.";
 
     private const string NAME_LENGTH_CANNOT_BE_GREATHER_THE_MAXIMUM_ALLOWED_NOTIFICATION_CODE = "NAME_LENGTH_CANNOT_BE_GREATHER_THE_MAXIMUM_ALLOWED";
-    private static string NAME_LENGTH_CANNOT_BE_GREATHER_THE_MAXIMUM_ALLOWED_NOTIFICATION_MESSAGE => $"O nome completo deve conter até {MAX_LENGTH} caracteres.";
+    private static string NAME_LENGTH_CANNOT_BE_GREATHER_THE_MAXIMUM_ALLOWED_NOTIFICATION_MESSAGE => $"O nome legal deve conter até {MAX_LENGTH} caracteres.";
 
     public static NameValueObject Factory(string name)
     {
@@ -45,9 +46,11 @@ public readonly struct NameValueObject
                 methodResult: MethodResult<INotification>.FactoryError(
                     notifications: notifications.ToArray()));
 
+        const string DEFAULT_CULTURE_INFO = "pt-br";
+
         return new NameValueObject(
             methodResult: MethodResult<INotification>.FactorySuccess(),
-            name: name);
+            name: CultureInfo.GetCultureInfo(DEFAULT_CULTURE_INFO).TextInfo.ToTitleCase(name));
     }
 
     public string GetName()
