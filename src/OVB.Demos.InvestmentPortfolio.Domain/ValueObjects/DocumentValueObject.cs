@@ -67,7 +67,7 @@ public readonly struct DocumentValueObject
         if (document.Length == CPF_DOCUMENT_REQUIRED_LENGTH)
             return PersonClassification.NATURAL_PERSON;
 
-        throw new ArgumentOutOfRangeException(nameof(GetPersonClassificationAccordingToDocument));
+        throw new ArgumentOutOfRangeException(nameof(document));
     }
 
     public string GetDocument()

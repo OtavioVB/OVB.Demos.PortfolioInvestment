@@ -124,7 +124,7 @@ public sealed class OperatorService : IOperatorService
             TokenType: TOKEN_TYPE);
     }
 
-    private MethodResult<INotification> ValidateExpectedPasswordWithActual(
+    private static MethodResult<INotification> ValidateExpectedPasswordWithActual(
         string expectedPassword,
         string actualPassword)
     {
@@ -140,7 +140,7 @@ public sealed class OperatorService : IOperatorService
         return MethodResult<INotification>.FactorySuccess();
     }
 
-    private MethodResult<INotification> ValidateOperatorNotFound(Operator? queriedOperator)
+    private static MethodResult<INotification> ValidateOperatorNotFound(Operator? queriedOperator)
     {
         const string OPERATOR_NOT_FOUND_NOTIFICATION_CODE = "OPERATOR_NOT_FOUND";
         const string OPERATOR_NOT_FOUND_NOTIFICATION_MESSAGE = "Não foi possível encontrar o operador para a conta associada.";

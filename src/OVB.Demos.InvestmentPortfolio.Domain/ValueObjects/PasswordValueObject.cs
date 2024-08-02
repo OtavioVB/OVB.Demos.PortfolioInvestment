@@ -139,10 +139,10 @@ public readonly struct PasswordValueObject
         return (stringBuilder.ToString(), salt);
     }
 
-    private byte[] GetPrivateKey(string privateKey)
+    private static byte[] GetPrivateKey(string privateKey)
         => Convert.FromBase64String(privateKey);
 
-    private string GenerateSalt()
+    private static string GenerateSalt()
     {
         const int SALT_LENGTH = 16;
 
