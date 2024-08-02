@@ -46,7 +46,16 @@ public readonly struct EmailValueObject
 
         try
         {
-            new MailAddress(address: email);
+            var emailAddress = new MailAddress(address: email);
+
+            if (Notification.HasAnyNotifications(notifications))
+                return new EmailValueObject(
+                    methodResult: MethodResult<INotification>.FactoryError(
+                        notifications: notifications.ToArray()));
+
+            return new EmailValueObject(
+                methodResult: MethodResult<INotification>.FactorySuccess(),
+                email: emailAddress.ToString());
         }
         catch
         {
@@ -54,16 +63,11 @@ public readonly struct EmailValueObject
                 item: Notification.FactoryFailure(
                     code: EMAIL_MUST_BE_VALID_NOTIFICATION_CODE,
                     message: EMAIL_MUST_BE_VALID_NOTIFICATION_MESSAGE));
-        }
 
-        if (Notification.HasAnyNotifications(notifications))
             return new EmailValueObject(
                 methodResult: MethodResult<INotification>.FactoryError(
                     notifications: notifications.ToArray()));
-
-        return new EmailValueObject(
-            methodResult: MethodResult<INotification>.FactorySuccess(),
-            email: email);
+        }
     }
 
     public string GetEmail()
