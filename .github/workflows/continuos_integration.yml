@@ -30,7 +30,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       shell: pwsh
       run: |
-        .\.sonar\scanner\dotnet-sonarscanner begin /k:"OtavioVB_OVB.Demos.PortfolioInvestment" /o:"otaviovb-1" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.coverage.exclusions="tsts/**,**/Migrations/**,Controlllers/**,Mappings/**" /d:sonar.exclusions="tst/**,**/Migrations/**"
+        .\.sonar\scanner\dotnet-sonarscanner begin /k:"OtavioVB_OVB.Demos.PortfolioInvestment" /o:"otaviovb-1" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.coverage.exclusions="tsts/**,**/Migrations/**,**/Controlllers/**,**/Mappings/**,**/EntityFrameworkCore/**" /d:sonar.exclusions="tst/**,**/Migrations/**"
         dotnet build --no-restore
         dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover ./tsts/OVB.Demos.InvestmentPortfolio.UnitTests/OVB.Demos.InvestmentPortfolio.UnitTests.csproj
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
