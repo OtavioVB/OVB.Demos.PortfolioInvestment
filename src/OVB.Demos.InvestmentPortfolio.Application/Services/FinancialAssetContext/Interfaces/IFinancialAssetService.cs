@@ -10,4 +10,8 @@ public interface IFinancialAssetService
     public Task<MethodResult<INotification, CreateFinancialAssetServiceOutput>> CreateFinancialAssetServiceAsync(
         CreateFinancialAssetServiceInput input,
         CancellationToken cancellationToken);
+
+    public Task<MethodResult<INotification, UpdateFinancialAssetServiceOutput>> UpdateFinancialAssetServiceAsync(
+        UpdateFinancialAssetServiceInput input,
+        CancellationToken cancellationToken);
 }

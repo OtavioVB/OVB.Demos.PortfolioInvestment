@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using OVB.Demos.InvestmentPortfolio.Application.Services.FinancialAssetContext.Inputs;
 using OVB.Demos.InvestmentPortfolio.Application.Services.FinancialAssetContext.Interfaces;
 using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.OperatorContext.DataTransferObject;
+using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 using OVB.Demos.InvestmentPortfolio.WebApi.Controllers.FinancialAssetContext.Payloads;
 using OVB.Demos.InvestmentPortfolio.WebApi.Controllers.FinancialAssetContext.Sendloads;
 using System.Net.Mime;
@@ -22,9 +23,11 @@ public sealed class FinancialAssetController : ControllerBase
         [FromBody] CreateFinancialAssetPayloadInput input,
         CancellationToken cancellationToken)
     {
+        var operatorId = HttpContext.User.FindFirst("OperatorId")!.Value;
+
         var createFinancialServiceResult = await financialAssetService.CreateFinancialAssetServiceAsync(
             input: CreateFinancialAssetServiceInput.Factory(
-                operatorId: Guid.Empty,
+                operatorId: Guid.Parse(operatorId),
                 symbol: input.Symbol,
                 description: input.Description,
                 expirationDate: input.ExpirationDate,
@@ -51,17 +54,51 @@ public sealed class FinancialAssetController : ControllerBase
                 status: createFinancialServiceResult.Output.FinancialAsset.Status,
                 interestRate: createFinancialServiceResult.Output.FinancialAsset.InterestRate,
                 unitaryPrice: createFinancialServiceResult.Output.FinancialAsset.UnitaryPrice,
-                quantityAvailable: createFinancialServiceResult.Output.FinancialAsset.QuantityAvailable));
+                quantityAvailable: createFinancialServiceResult.Output.FinancialAsset.QuantityAvailable,
+                notifications: createFinancialServiceResult.Notifications));
     }
 
     [HttpPatch]
     [Consumes(MediaTypeNames.Application.Json)]
+    [Route("{financialAssetId}")]
     [Authorize(Roles = nameof(Operator))]
-    public async Task<IActionResult> HttpPostEditFinancialAssetAsync(
+    public async Task<IActionResult> HttpPatchUpdateFinancialAssetAsync(
         [FromServices] IFinancialAssetService financialAssetService,
-        [FromBody] CreateFinancialAssetPayloadInput input,
+        [FromRoute] Guid financialAssetId,
+        [FromBody] UpdateFinancialAssetPayloadInput input,
         CancellationToken cancellationToken)
     {
-        return Ok();
+        var operatorId = HttpContext.User.FindFirst("OperatorId")!.Value;
+
+        var updateFinancialAssetServiceResult = await financialAssetService.UpdateFinancialAssetServiceAsync(
+            input: UpdateFinancialAssetServiceInput.Factory(
+                operatorId: Guid.Parse(operatorId),
+                financialAssetId: financialAssetId,
+                symbol: input.Symbol is null ? (AssetSymbolValueObject?)null : AssetSymbolValueObject.Factory(input.Symbol),
+                description: DescriptionValueObject.Factory(input.Description),
+                expirationDate: input.ExpirationDate is null ? null : input.ExpirationDate,
+                status: input.Status is null ? (AssetStatusValueObject?)null : AssetStatusValueObject.Factory(input.Status),
+                interestRate: input.InterestRate is null ? null : input.InterestRate.Value,
+                unitaryPrice: input.UnitaryPrice is null ? null : input.UnitaryPrice.Value,
+                quantityAvailable: input.QuantityAvailable is null ? null : input.QuantityAvailable.Value),
+            cancellationToken: cancellationToken);
+
+        if (updateFinancialAssetServiceResult.IsError)
+            return BadRequest(updateFinancialAssetServiceResult.Notifications);
+
+        return StatusCode(
+            statusCode: StatusCodes.Status200OK,
+            value: UpdateFinancialAssetSendloadOutput.Factory(
+                financialAssetId: updateFinancialAssetServiceResult.Output.FinancialAsset.Id,
+                symbol: updateFinancialAssetServiceResult.Output.FinancialAsset.Symbol,
+                description: updateFinancialAssetServiceResult.Output.FinancialAsset.Description,
+                expirationDate: updateFinancialAssetServiceResult.Output.FinancialAsset.ExpirationDate,
+                index: updateFinancialAssetServiceResult.Output.FinancialAsset.Index,
+                type: updateFinancialAssetServiceResult.Output.FinancialAsset.Type,
+                status: updateFinancialAssetServiceResult.Output.FinancialAsset.Status,
+                interestRate: updateFinancialAssetServiceResult.Output.FinancialAsset.InterestRate,
+                unitaryPrice: updateFinancialAssetServiceResult.Output.FinancialAsset.UnitaryPrice,
+                quantityAvailable: updateFinancialAssetServiceResult.Output.FinancialAsset.QuantityAvailable,
+                notifications: updateFinancialAssetServiceResult.Notifications));
     }
 }

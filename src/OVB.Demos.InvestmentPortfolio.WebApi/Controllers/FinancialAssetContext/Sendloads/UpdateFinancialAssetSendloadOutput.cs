@@ -1,9 +1,8 @@
 ﻿using OVB.Demos.InvestmentPortfolio.Domain.Utils.NotificationContext.Interfaces;
-using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 
 namespace OVB.Demos.InvestmentPortfolio.WebApi.Controllers.FinancialAssetContext.Sendloads;
 
-public readonly struct CreateFinancialAssetSendloadOutput
+public readonly struct UpdateFinancialAssetSendloadOutput
 {
     public string FinancialAssetId { get; }
     public string Symbol { get; }
@@ -17,7 +16,7 @@ public readonly struct CreateFinancialAssetSendloadOutput
     public decimal QuantityAvailable { get; }
     public INotification[] Notifications { get; }
 
-    private CreateFinancialAssetSendloadOutput(string financialAssetId, string symbol, string? description, string expirationDate, string index,
+    private UpdateFinancialAssetSendloadOutput(string financialAssetId, string symbol, string? description, string expirationDate, string index,
         string type, string status, decimal interestRate, decimal unitaryPrice, decimal quantityAvailable, INotification[] notifications)
     {
         FinancialAssetId = financialAssetId;
@@ -33,7 +32,7 @@ public readonly struct CreateFinancialAssetSendloadOutput
         Notifications = notifications;
     }
 
-    public static CreateFinancialAssetSendloadOutput Factory(string financialId, string symbol, string? description, string expirationDate, string index,
+    public static UpdateFinancialAssetSendloadOutput Factory(string financialAssetId, string symbol, string? description, string expirationDate, string index,
         string type, string status, decimal interestRate, decimal unitaryPrice, decimal quantityAvailable, INotification[] notifications)
-        => new(financialId, symbol, description, expirationDate, index, type, status, interestRate, unitaryPrice, quantityAvailable, notifications);
+        => new(financialAssetId, symbol, description, expirationDate, index, type, status, interestRate, unitaryPrice, quantityAvailable, notifications);
 }

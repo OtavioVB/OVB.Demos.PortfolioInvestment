@@ -3,20 +3,23 @@ using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Base;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Base.Interfaces;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Extensions;
+using OVB.Demos.InvestmentPortfolio.UnitTests.Domain.FinancialAssetContext;
 
 namespace OVB.Demos.InvestmentPortfolio.UnitTests.Application.Services.FinancialAssetContext.Fakes;
 
 public sealed class FakerExtensionFinancialAssetRepository : IBaseRepository<FinancialAsset>, IExtensionFinancialAssetRepository
 {
     public readonly bool _existsSymbol;
+    public readonly bool _existsFinancialAssetOnGet;
 
-    public FakerExtensionFinancialAssetRepository(bool existsSymbol)
+    public FakerExtensionFinancialAssetRepository(bool existsSymbol, bool existsFinancialAssetOnGet = true)
     {
         _existsSymbol = existsSymbol;
+        _existsFinancialAssetOnGet = existsFinancialAssetOnGet;
     }
 
     public Task AddAsync(FinancialAsset entity, CancellationToken cancellationToken)
-        => Task.Run(Console.WriteLine);
+        => Task.CompletedTask;
 
     public Task AddRangeAsync(FinancialAsset[] entities, CancellationToken cancellationToken)
     {
@@ -24,9 +27,9 @@ public sealed class FakerExtensionFinancialAssetRepository : IBaseRepository<Fin
     }
 
     public Task<FinancialAsset?> GetEntityByIdAsync(Guid id, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
+        => _existsFinancialAssetOnGet 
+            ? Task.FromResult((FinancialAsset?)FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE)
+            : Task.FromResult((FinancialAsset?)null);
 
     public Task RemoveAsync(FinancialAsset entity, CancellationToken cancellationToken)
     {
@@ -39,9 +42,7 @@ public sealed class FakerExtensionFinancialAssetRepository : IBaseRepository<Fin
     }
 
     public Task UpdateAsync(FinancialAsset entity, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
+        => Task.CompletedTask;
 
     public Task UpdateRangeAsync(FinancialAsset[] entities, CancellationToken cancellationToken)
     {
