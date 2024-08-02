@@ -16,7 +16,7 @@ public sealed class ExtractDataTransferObjectValidationTests
         quantity: 3)
     {
         Customer = CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE,
-        FinancialAsset = FinancialAssertDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE
+        FinancialAsset = FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE
     };
     
     [Theory]
@@ -36,7 +36,7 @@ public sealed class ExtractDataTransferObjectValidationTests
             unitaryPrice: unitaryPrice,
             quantity: quantity);
         extract.Customer = CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE;
-        extract.FinancialAsset = FinancialAssertDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE;
+        extract.FinancialAsset = FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE;
 
         // Assert
         Assert.Equal(extractId, extract.Id);
@@ -46,6 +46,6 @@ public sealed class ExtractDataTransferObjectValidationTests
         Assert.Equal(unitaryPrice, extract.UnitaryPrice.GetUnitaryPrice());
         Assert.Equal(quantity, extract.Quantity.GetQuantityAvailable());
         Assert.Equal(CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE, extract.Customer);
-        Assert.Equal(FinancialAssertDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE, extract.FinancialAsset);
+        Assert.Equal(FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE, extract.FinancialAsset);
     }
 }

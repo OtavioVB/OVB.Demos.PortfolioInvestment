@@ -16,7 +16,7 @@ public sealed class OrderDataTransferObjectValidationTests
         unitaryPrice: 5,
         totalPrice: 15)
     {
-        FinancialAsset = FinancialAssertDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE,
+        FinancialAsset = FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE,
         Customer = CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE,
     };
 
@@ -38,7 +38,7 @@ public sealed class OrderDataTransferObjectValidationTests
             unitaryPrice: unitaryPrice,
             totalPrice: totalPrice)
         {
-            FinancialAsset = FinancialAssertDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE,
+            FinancialAsset = FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE,
             Customer = CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE
         };
 
@@ -50,7 +50,7 @@ public sealed class OrderDataTransferObjectValidationTests
         Assert.Equal(quantity, order.Quantity.GetQuantity());
         Assert.Equal(unitaryPrice, order.UnitaryPrice.GetUnitaryPrice());
         Assert.Equal(totalPrice, order.TotalPrice.GetTotalPrice());
-        Assert.Equal(FinancialAssertDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE, order.FinancialAsset);
+        Assert.Equal(FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE, order.FinancialAsset);
         Assert.Equal(CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE, order.Customer);
     }
 }

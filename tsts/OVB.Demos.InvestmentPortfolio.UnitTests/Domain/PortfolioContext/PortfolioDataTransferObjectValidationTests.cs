@@ -20,7 +20,7 @@ public sealed class PortfolioDataTransferObjectValidationTests
             quantity: quantity)
         {
             Customer = CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE,
-            FinancialAsset = FinancialAssertDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE
+            FinancialAsset = FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE
         };
 
         // Assert
@@ -28,6 +28,6 @@ public sealed class PortfolioDataTransferObjectValidationTests
         Assert.Equal(totalPrice, portfolio.TotalPrice.GetTotalPrice());
         Assert.Equal(quantity, portfolio.Quantity.GetQuantity());
         Assert.Equal(CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE, portfolio.Customer);
-        Assert.Equal(FinancialAssertDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE, portfolio.FinancialAsset);
+        Assert.Equal(FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE, portfolio.FinancialAsset);
     }
 }

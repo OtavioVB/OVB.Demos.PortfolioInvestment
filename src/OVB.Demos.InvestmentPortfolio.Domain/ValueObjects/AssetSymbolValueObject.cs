@@ -62,4 +62,6 @@ public readonly struct AssetSymbolValueObject
         => Factory(obj);
     public static implicit operator string(AssetSymbolValueObject obj)
         => obj.GetSymbol();
+    public static implicit operator MethodResult<INotification>(AssetSymbolValueObject obj)
+        => obj.MethodResult;
 }

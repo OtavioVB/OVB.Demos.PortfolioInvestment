@@ -6,13 +6,13 @@ using System;
 
 namespace OVB.Demos.InvestmentPortfolio.UnitTests.Domain.FinancialAssetContext;
 
-public sealed class FinancialAssertDataTransferObjectValidationTests
+public sealed class FinancialAssetDataTransferObjectValidationTests
 {
     public static FinancialAsset FINANCIAL_ASSET_EXAMPLE = new FinancialAsset(
         id: Guid.NewGuid(),
         symbol: "CDB",
         description: "Certificado de Depósito Bancário",
-        expirationDate: DateTime.Parse("2100-07-31"),
+        expirationDate: DateTime.UtcNow.AddYears(100).Date,
         index: FinancialAssetIndex.CDI,
         type: FinancialAssetType.PRE_FIXED,
         status: FinancialAssetStatus.ACTIVE,

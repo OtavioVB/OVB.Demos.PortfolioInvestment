@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.FinancialAssetContext.DataTransferObject;
+using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Base;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Extensions;
 
@@ -13,4 +14,7 @@ public sealed class FinancialAssetRepository : BaseRepository<FinancialAsset>, I
 
     public override Task<FinancialAsset?> GetEntityByIdAsync(Guid id, CancellationToken cancellationToken)
         => _dataContext.Set<FinancialAsset>().Where(p => p.Id.GetIdentity() == id).FirstOrDefaultAsync(cancellationToken);
+
+    public Task<bool> VerifyFinancialAssetExistsBySymbolAsync(AssetSymbolValueObject symbol, CancellationToken cancellationToken)
+        => _dataContext.Set<FinancialAsset>().AsNoTracking().Where(p => p.Symbol == symbol).AnyAsync(cancellationToken);
 }
