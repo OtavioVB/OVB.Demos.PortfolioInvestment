@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
 
 namespace OVB.Demos.InvestmentPortfolio.WebApi.Controllers;
@@ -14,8 +16,9 @@ public sealed class OperatorController : ControllerBase
     [Route("oauth/token")]
     [AllowAnonymous]
     public Task<IActionResult> HttpPostOAuthOperatorAuthenticationAsync(
-        [FromForm] string email,
-        [FromForm] string password,
+        [MaxLength(EmailValueObject.MAX_LENGTH)][Required][FromForm] string email,
+        [MaxLength(PasswordValueObject.MAX_LENGTH)][Required][FromForm] string password,
+        [Required][FromForm] string grantType,
         CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
