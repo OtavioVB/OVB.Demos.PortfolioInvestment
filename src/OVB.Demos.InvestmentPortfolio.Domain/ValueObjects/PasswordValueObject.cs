@@ -60,39 +60,21 @@ public readonly struct PasswordValueObject
                 code: PASSWORD_LENGTH_CANNOT_BE_GREATER_THAN_THE_MAXIMUM_ALLOWED_NOTIFICATION_CODE,
                 message: PASSWORD_LENGTH_CANNOT_BE_GREATER_THAN_THE_MAXIMUM_ALLOWED_NOTIFICATION_MESSAGE));
 
-        var hasAnyDigit = false;
-        foreach (var character in password)
-            if (char.IsDigit(character))
-            {
-                hasAnyDigit = true;
-                break;
-            }
+        var hasAnyDigit = password.Any(char.IsDigit);
 
         if (!hasAnyDigit)
             notifications.Add(Notification.FactoryFailure(
                 code: PASSWORD_NEEDS_TO_HAVE_DIGITS_NOTIFICATION_CODE,
                 message: PASSWORD_NEEDS_TO_HAVE_DIGITS_NOTIFICATION_MESSAGE));
 
-        var hasAnyLetter = false;
-        foreach (var character in password)
-            if (char.IsLetter(character))
-            {
-                hasAnyLetter = true;
-                break;
-            }
+        var hasAnyLetter = password.Any(char.IsLetter);
 
         if (!hasAnyLetter)
             notifications.Add(Notification.FactoryFailure(
                 code: PASSWORD_NEEDS_TO_HAVE_LETTERS_NOTIFICATION_CODE,
                 message: PASSWORD_NEEDS_TO_HAVE_LETTERS_NOTIFICATION_MESSAGE));
 
-        var hasAnySpecialLetter = false;
-        foreach (var character in password)
-            if (!char.IsLetterOrDigit(character))
-            {
-                hasAnySpecialLetter = true;
-                break;
-            }
+        var hasAnySpecialLetter = password.Any(p => !char.IsLetterOrDigit(p));
 
         if (!hasAnySpecialLetter)
             notifications.Add(Notification.FactoryFailure(

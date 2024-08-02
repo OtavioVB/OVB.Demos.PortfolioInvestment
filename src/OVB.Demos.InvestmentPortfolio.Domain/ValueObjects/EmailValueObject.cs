@@ -46,7 +46,7 @@ public readonly struct EmailValueObject
 
         try
         {
-            var mailAddress = new MailAddress(address: email);
+            new MailAddress(address: email);
         }
         catch
         {

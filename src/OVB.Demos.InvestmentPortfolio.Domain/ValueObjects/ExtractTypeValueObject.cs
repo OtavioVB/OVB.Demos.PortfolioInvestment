@@ -22,10 +22,6 @@ public readonly struct ExtractTypeValueObject
 
     public static ExtractTypeValueObject Factory(string extract)
     {
-        const int CAPACITY_NOTIFICATIONS_POSSIBLE = 2;
-
-        var notifications = new List<INotification>(CAPACITY_NOTIFICATIONS_POSSIBLE);
-
         var isPossibleToConvertAsExtractTypeEnumerator = Enum.TryParse<ExtractType>(
             value: extract,
             ignoreCase: false,
