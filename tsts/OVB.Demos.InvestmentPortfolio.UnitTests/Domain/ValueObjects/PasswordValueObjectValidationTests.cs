@@ -6,7 +6,7 @@ namespace OVB.Demos.InvestmentPortfolio.UnitTests.Domain.ValueObjects;
 
 public sealed class PasswordValueObjectValidationTests
 {
-    private const string PRIVATE_KEY = "OGIxMmM1NmFiY2I2NDA2YTkwMGUyNGZiZDU4NGNlZjA=";
+    public const string PRIVATE_KEY = "OGIxMmM1NmFiY2I2NDA2YTkwMGUyNGZiZDU4NGNlZjA=";
 
     [Theory]
     [InlineData("DJJ54H*LJ#@0", false)]

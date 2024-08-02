@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.OperatorContext.DataTransferObject;
+using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Base;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Extensions;
 
@@ -13,4 +14,7 @@ public sealed class OperatorRepository : BaseRepository<Operator>, IExtensionOpe
 
     public override Task<Operator?> GetEntityByIdAsync(Guid id, CancellationToken cancellationToken)
         => _dataContext.Set<Operator>().Where(p => p.Id.GetIdentity() == id).FirstOrDefaultAsync(cancellationToken);
+
+    public Task<Operator?> GetOperatorByEmailAsNoTrackingAsync(EmailValueObject email, CancellationToken cancellationToken)
+        => _dataContext.Set<Operator>().AsNoTracking().Where(p => p.Email == email).FirstOrDefaultAsync(cancellationToken);
 }

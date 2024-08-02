@@ -77,7 +77,6 @@ public readonly struct MethodResult<TNotification>
 /// </summary>
 public readonly struct MethodResult<TNotification, TOutput>
     where TNotification : INotification
-    where TOutput : class
 {
     public MethodResultType Type { get; }
     public TOutput? Output { get; }
@@ -85,21 +84,21 @@ public readonly struct MethodResult<TNotification, TOutput>
     public bool IsError => Type == MethodResultType.Error;
     public TNotification[] Notifications { get; }
 
-    private MethodResult(MethodResultType type, TNotification[] notifications, TOutput? output = null)
+    private MethodResult(MethodResultType type, TNotification[] notifications, TOutput? output = default)
     {
         Type = type;
         Notifications = notifications;
         Output = output;
     }
 
-    public static MethodResult<TNotification, TOutput> Factory(MethodResultType type, TNotification[]? notifications = null, TOutput? output = null)
+    public static MethodResult<TNotification, TOutput> Factory(MethodResultType type, TNotification[]? notifications = null, TOutput? output = default)
         => new MethodResult<TNotification, TOutput>(type, notifications ?? [], output);
-    public static MethodResult<TNotification, TOutput> FactoryError(TNotification[]? notifications = null, TOutput? output = null)
+    public static MethodResult<TNotification, TOutput> FactoryError(TNotification[]? notifications = null, TOutput? output = default)
         => Factory(MethodResultType.Error, notifications, output);
-    public static MethodResult<TNotification, TOutput> FactorySuccess(TNotification[]? notifications = null, TOutput? output = null)
+    public static MethodResult<TNotification, TOutput> FactorySuccess(TNotification[]? notifications = null, TOutput? output = default)
         => Factory(MethodResultType.Success, notifications, output);
     public static MethodResult<TNotification, TOutput> Factory(
-        TOutput? output = null,
+        TOutput? output = default,
         params MethodResult<TNotification>[] processResults)
     {
 

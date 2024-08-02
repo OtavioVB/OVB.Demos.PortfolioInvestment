@@ -1,4 +1,6 @@
-﻿using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
+﻿using OVB.Demos.InvestmentPortfolio.Domain.Utils.MethodResultContext;
+using OVB.Demos.InvestmentPortfolio.Domain.Utils.NotificationContext.Interfaces;
+using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 
 namespace OVB.Demos.InvestmentPortfolio.Application.Services.OperatorContext.Inputs;
 
@@ -17,4 +19,7 @@ public readonly struct OAuthOperatorAuthenticationServiceInput
 
     public static OAuthOperatorAuthenticationServiceInput Factory(GrantTypeValueObject grantType, EmailValueObject email, PasswordValueObject password)
         => new(grantType, email, password);
+
+    public MethodResult<INotification> GetInputValidationResult()
+        => MethodResult<INotification>.Factory(GrantType, Email, Password);
 }

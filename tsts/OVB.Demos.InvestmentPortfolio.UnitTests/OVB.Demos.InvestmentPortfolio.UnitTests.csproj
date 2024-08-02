@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\OVB.Demos.InvestmentPortfolio.Application\OVB.Demos.InvestmentPortfolio.Application.csproj" />
     <ProjectReference Include="..\..\src\OVB.Demos.InvestmentPortfolio.Domain\OVB.Demos.InvestmentPortfolio.Domain.csproj" />
     <ProjectReference Include="..\..\src\OVB.Demos.InvestmentPortfolio.Infrascructure\OVB.Demos.InvestmentPortfolio.Infrascructure.csproj" />
   </ItemGroup>
