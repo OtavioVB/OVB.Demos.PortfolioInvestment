@@ -5,12 +5,14 @@ namespace OVB.Demos.InvestmentPortfolio.UnitTests.Domain.OperatorContext;
 
 public sealed class OperatorDataTransferObjectValidationTests
 {
+    public const string PASSWORD = "_836hjfk7DH8!";
+
     public static Operator OPERATOR_EXAMPLE = new Operator(
             id: Guid.NewGuid(),
             code: "OPT09FADLKJ",
             name: "Otávio Carmanini",
             email: "otaviovb.developer@gmail.com",
-            passwordHash: "123456789**&",
+            passwordHash: "8b440d3cfef73bda67eb80626dcb359b0ddd1cd319656c3eadc5bd452414d676",
             salt: "82J2347KHA4K",
             document: "00000000000");
 

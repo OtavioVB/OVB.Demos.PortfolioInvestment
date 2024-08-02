@@ -32,6 +32,7 @@ public sealed class OAuthOperatorAuthenticationServiceInputValidationTests
         Assert.Equal(EXPECTED_GRANT_TYPE, input.GrantType.GetGrantType());
         Assert.Equal(EXPECTED_EMAIL, input.Email.GetEmail());
         Assert.NotEmpty(input.Password.GetPasswordHashAndSalt(PasswordValueObjectValidationTests.PRIVATE_KEY).PasswordHash);
-        Assert.Equal(methodResult, input.GetInputValidationResult());
+        Assert.Equal(methodResult.Notifications, input.GetInputValidationResult().Notifications);
+        Assert.Equal(methodResult.IsSuccess, input.GetInputValidationResult().IsSuccess);
     }
 }
