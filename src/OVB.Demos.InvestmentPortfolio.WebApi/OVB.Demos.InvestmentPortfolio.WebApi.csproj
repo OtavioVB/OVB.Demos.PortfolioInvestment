@@ -14,4 +14,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OVB.Demos.InvestmentPortfolio.Application\OVB.Demos.InvestmentPortfolio.Application.csproj" />
+    <ProjectReference Include="..\OVB.Demos.InvestmentPortfolio.Domain\OVB.Demos.InvestmentPortfolio.Domain.csproj" />
+    <ProjectReference Include="..\OVB.Demos.InvestmentPortfolio.Infrascructure\OVB.Demos.InvestmentPortfolio.Infrascructure.csproj" />
+  </ItemGroup>
+
 </Project>

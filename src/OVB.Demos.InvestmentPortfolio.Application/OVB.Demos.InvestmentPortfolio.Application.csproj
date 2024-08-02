@@ -11,10 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\FinancialAssetContext\Inputs\" />
-    <Folder Include="Services\FinancialAssetContext\Interfaces\" />
-    <Folder Include="Services\FinancialAssetContext\Outputs\" />
     <Folder Include="UseCases\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OVB.Demos.InvestmentPortfolio.Domain\OVB.Demos.InvestmentPortfolio.Domain.csproj" />
+    <ProjectReference Include="..\OVB.Demos.InvestmentPortfolio.Infrascructure\OVB.Demos.InvestmentPortfolio.Infrascructure.csproj" />
   </ItemGroup>
 
 </Project>

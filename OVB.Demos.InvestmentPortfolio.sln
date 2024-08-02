@@ -25,6 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OVB.Demos.InvestmentPortfol
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "devops", "devops", "{406565FF-D296-45CC-A2BC-1D91FACBFE14}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\continuos_integration.yml = .github\workflows\continuos_integration.yml
 		devops\docker-compose.Local.yaml = devops\docker-compose.Local.yaml
 	EndProjectSection
 EndProject
