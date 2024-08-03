@@ -19,7 +19,7 @@ public sealed class IdentityValueObjectValidationTests
         Assert.True(identityValueObject1.MethodResult.IsSuccess);
         Assert.True(identityValueObject2.MethodResult.IsSuccess);
         Assert.Equal(uuidGenerated, identityValueObject1.GetIdentity());
-        Assert.Equal(uuidGenerated, identityValueObject1);
+        Assert.Equal<Guid>(uuidGenerated, identityValueObject1);
         Assert.Equal(uuidGeneratedAsString, identityValueObject1.GetIdentityAsString());
         Assert.Equal(uuidGeneratedAsString, identityValueObject1);
     }

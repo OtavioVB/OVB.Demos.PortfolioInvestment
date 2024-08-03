@@ -39,7 +39,7 @@ public sealed class ExtractDataTransferObjectValidationTests
         extract.FinancialAsset = FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE;
 
         // Assert
-        Assert.Equal(extractId, extract.Id);
+        Assert.Equal<Guid>(extractId, extract.Id);
         Assert.Equal(extractAt, extract.CreatedAt);
         Assert.Equal(type, extract.Type.GetExtractType());
         Assert.Equal(totalPrice, extract.TotalPrice.GetTotalPrice());

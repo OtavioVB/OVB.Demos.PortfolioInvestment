@@ -34,7 +34,7 @@ public sealed class OperatorDataTransferObjectValidationTests
             document: document);
 
         // Assert
-        Assert.Equal(uuidGenerated, portfolioOperator.Id);
+        Assert.Equal<Guid>(uuidGenerated, portfolioOperator.Id);
         Assert.Equal(code, portfolioOperator.Code);
         Assert.Equal(name, portfolioOperator.Name);
         Assert.Equal(email, portfolioOperator.Email);

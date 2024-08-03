@@ -24,7 +24,7 @@ public sealed class PortfolioDataTransferObjectValidationTests
         };
 
         // Assert
-        Assert.Equal(portfolioId, portfolio.Id);
+        Assert.Equal<Guid>(portfolioId, portfolio.Id);
         Assert.Equal(totalPrice, portfolio.TotalPrice.GetTotalPrice());
         Assert.Equal(quantity, portfolio.Quantity.GetQuantity());
         Assert.Equal(CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE, portfolio.Customer);

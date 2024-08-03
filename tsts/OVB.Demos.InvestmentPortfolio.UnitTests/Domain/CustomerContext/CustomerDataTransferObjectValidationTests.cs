@@ -27,7 +27,7 @@ public sealed class CustomerDataTransferObjectValidationTests
             email: email);
 
         // Assert
-        Assert.Equal(uuidGenerated, customer.Id);
+        Assert.Equal<Guid>(uuidGenerated, customer.Id);
         Assert.Equal(code, customer.Code);
         Assert.Equal(name, customer.Name);
         Assert.Equal(document, customer.Document);

@@ -43,7 +43,7 @@ public sealed class OrderDataTransferObjectValidationTests
         };
 
         // Assert
-        Assert.Equal(orderId, order.Id);
+        Assert.Equal<Guid>(orderId, order.Id);
         Assert.Equal(createdAtDate, order.CreatedAt);
         Assert.Equal(type, order.Type.GetOrderType());
         Assert.Equal(status, order.Status.GetOrderStatus());
