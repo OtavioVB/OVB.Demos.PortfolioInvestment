@@ -18,13 +18,14 @@ public static class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.ApplyInfrascructureDependenciesConfiguration(
-            npgsqlConnectionString: builder.Configuration["Infrascructure:Database:NpgsqlConnectionString"] ?? throw new ArgumentNullException(nameof(NpgsqlConnectionStringBuilder)));
+            npgsqlConnectionString: builder.Configuration["Infrascructure:Database:NpgsqlConnectionString"]!);
 
-        string JWT_BEARER_ISSUER_SIGNING_KEY = builder.Configuration["Application:JwtBearerIssuerPrivateKey"] ?? throw new ArgumentNullException(nameof(Application.DependencyInjection.ApplyApplicationDependenciesConfiguration));
+        string JWT_BEARER_ISSUER_SIGNING_KEY = builder.Configuration["Application:JwtBearerIssuerPrivateKey"]!;
 
         builder.Services.ApplyApplicationDependenciesConfiguration(
             jwtBearerIssuerSigningKey: JWT_BEARER_ISSUER_SIGNING_KEY,
-            passwordHashPrivateKey: builder.Configuration["Application:SHA256PrivateKey"] ?? throw new ArgumentNullException(nameof(Application.DependencyInjection.ApplyApplicationDependenciesConfiguration)));
+            passwordHashPrivateKey: builder.Configuration["Application:SHA256PrivateKey"]!,
+            sendEmailApiKey: builder.Configuration["Application:SendEmailApiKey"]!);
 
         builder.Services.AddAuthentication(options =>
         {

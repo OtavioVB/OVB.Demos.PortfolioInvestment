@@ -15,7 +15,8 @@ public static class DependencyInjection
     public static void ApplyApplicationDependenciesConfiguration(
         this IServiceCollection serviceCollection, 
         string jwtBearerIssuerSigningKey, 
-        string passwordHashPrivateKey)
+        string passwordHashPrivateKey,
+        string sendEmailApiKey)
     {
         #region Services Dependencies Configuration
 
@@ -29,7 +30,8 @@ public static class DependencyInjection
             => new FinancialAssetService(
                 extensionFinancialAssetRepository: serviceProvider.GetRequiredService<IExtensionFinancialAssetRepository>(),
                 baseFinancialAssetRepository: serviceProvider.GetRequiredService<IBaseRepository<FinancialAsset>>(),
-                unitOfWork: serviceProvider.GetRequiredService<IUnitOfWork>()));
+                unitOfWork: serviceProvider.GetRequiredService<IUnitOfWork>(),
+                sendEmailApiKey: sendEmailApiKey));
 
         #endregion
     }
