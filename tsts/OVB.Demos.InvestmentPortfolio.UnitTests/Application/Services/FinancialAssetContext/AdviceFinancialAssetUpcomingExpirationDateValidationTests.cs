@@ -24,7 +24,7 @@ public sealed class AdviceFinancialAssetUpcomingExpirationDateValidationTests
 
         const string EXPECTED_NOTIFICATION_CODE = "FINANCIAL_ASSET_ADVICE_HAS_SENT_SUCCESS";
         const string EXPECTED_NOTIFICATION_MESSAGE = "Todos os avisos de vencimento próximo de ativos financeiros foram enviados para os gestores.";
-        const string EXPECTED_NOTIFICATION_TYPE = "Failure";
+        const string EXPECTED_NOTIFICATION_TYPE = "Success";
 
         // Act
         var serviceResult = await financialAssetService.AdviceFinancialAssetUpcomingExpirationDateAsync(
