@@ -15,6 +15,9 @@ public sealed class FinancialAssetRepository : BaseRepository<FinancialAsset>, I
     public override Task<FinancialAsset?> GetEntityByIdAsync(Guid id, CancellationToken cancellationToken)
         => _dataContext.Set<FinancialAsset>().Where(p => p.Id.GetIdentity() == id).FirstOrDefaultAsync(cancellationToken);
 
+    public Task<FinancialAsset[]> QueryFinancialAssetAsNoTrackingByPaginationAsync(PageValueObject page, OffsetValueObject offset, CancellationToken cancellationToken)
+        => _dataContext.Set<FinancialAsset>().AsNoTracking().Skip(page.GetIndex()).Take(offset).ToArrayAsync(cancellationToken);
+
     public Task<bool> VerifyFinancialAssetExistsBySymbolAsync(AssetSymbolValueObject symbol, CancellationToken cancellationToken)
         => _dataContext.Set<FinancialAsset>().AsNoTracking().Where(p => p.Symbol == symbol).AnyAsync(cancellationToken);
 }
