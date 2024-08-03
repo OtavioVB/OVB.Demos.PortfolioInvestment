@@ -16,5 +16,5 @@ public readonly struct SendEmailModel
     }
 
     public static SendEmailModel Factory(string from, string to, string subject, string html)
-        => new(from, to subject, html);
+        => new(from, to, subject, html);
 }

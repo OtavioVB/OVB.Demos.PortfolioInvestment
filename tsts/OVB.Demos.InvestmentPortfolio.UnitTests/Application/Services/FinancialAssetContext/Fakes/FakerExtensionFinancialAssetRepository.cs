@@ -34,6 +34,9 @@ public sealed class FakerExtensionFinancialAssetRepository : IBaseRepository<Fin
     public Task<FinancialAsset[]> QueryFinancialAssetAsNoTrackingByPaginationAsync(PageValueObject page, OffsetValueObject offset, CancellationToken cancellationToken)
         => Task.FromResult(_existsFinancialAssetOnGet == true ? (FinancialAsset[])[FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE] : []);
 
+    public Task<FinancialAsset[]> QueryFinancialAssetAsNoTrackingWhenExpirationDateIsLessThanExpectedDateIncludingOperatorsAsync(DateTime expirationDateExpected, CancellationToken cancellationToken)
+        => Task.FromResult(_existsFinancialAssetOnGet == true ? (FinancialAsset[])[FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE] : []);
+
     public Task RemoveAsync(FinancialAsset entity, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
