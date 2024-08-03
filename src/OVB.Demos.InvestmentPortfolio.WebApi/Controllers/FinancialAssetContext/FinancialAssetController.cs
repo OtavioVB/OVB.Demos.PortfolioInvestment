@@ -101,4 +101,42 @@ public sealed class FinancialAssetController : ControllerBase
                 quantityAvailable: updateFinancialAssetServiceResult.Output.FinancialAsset.QuantityAvailable,
                 notifications: updateFinancialAssetServiceResult.Notifications));
     }
+
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> HttpGetQueryFinancialAssetAsync(
+        [FromServices] IFinancialAssetService financialAssetService,
+        CancellationToken cancellationToken,
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 25)
+    {
+        var queryFinancialAssetsServiceResult = await financialAssetService.QueryFinancialAssetServiceAsync(
+            input: QueryFinancialAssetServiceInput.Factory(
+                page: page,
+                offset: size),
+            cancellationToken: cancellationToken);
+
+        if (queryFinancialAssetsServiceResult.IsError)
+            return StatusCode(
+                statusCode: StatusCodes.Status400BadRequest,
+                value: queryFinancialAssetsServiceResult.Notifications);
+
+        return StatusCode(
+            statusCode: StatusCodes.Status200OK,
+            value: QueryFinancialAssetSendloadOutput.Factory(
+                page: queryFinancialAssetsServiceResult.Output.Page,
+                offset: queryFinancialAssetsServiceResult.Output.Offset,
+                items: queryFinancialAssetsServiceResult.Output.FinancialAssets.Select(p => QueryFinancialAssetSendloadOutputItem.Factory(
+                    financialAssetId: p.Id,
+                    symbol: p.Symbol,
+                    description: p.Description,
+                    expirationDate: p.ExpirationDate,
+                    index: p.Index,
+                    type: p.Type,
+                    status: p.Status,
+                    interestRate: p.InterestRate,
+                    unitaryPrice: p.UnitaryPrice,
+                    quantityAvailable: p.QuantityAvailable)).ToArray(),
+                notifications: queryFinancialAssetsServiceResult.Notifications));
+    }
 }
