@@ -1,7 +1,7 @@
 ﻿using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.UnitOfWork.Interfaces;
 using System.Data;
 
-namespace OVB.Demos.InvestmentPortfolio.UnitTests.Application.Services.FinancialAssetContext.Fakes;
+namespace OVB.Demos.InvestmentPortfolio.UnitTests.Application.Services;
 
 public sealed class FakerUnitOfWork : IUnitOfWork
 {

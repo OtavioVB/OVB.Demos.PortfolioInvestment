@@ -32,7 +32,7 @@ public sealed class OAuthOperatorAuthenticationServiceValidationTests
             input: OAuthOperatorAuthenticationServiceInput.Factory(
                 grantType: GRANT_TYPE,
                 email: OperatorDataTransferObjectValidationTests.OPERATOR_EXAMPLE.Email,
-                password: PasswordValueObject.Factory(OperatorDataTransferObjectValidationTests.PASSWORD)),
+                password: PasswordValueObject.Factory(OperatorDataTransferObjectValidationTests.EXAMPLE_PWD_TEST)),
             cancellationToken: CancellationToken.None);
 
         // Assert
@@ -94,7 +94,7 @@ public sealed class OAuthOperatorAuthenticationServiceValidationTests
             input: OAuthOperatorAuthenticationServiceInput.Factory(
                 grantType: GRANT_TYPE,
                 email: "wrong@email.com.br",
-                password: PasswordValueObject.Factory(OperatorDataTransferObjectValidationTests.PASSWORD)),
+                password: PasswordValueObject.Factory(OperatorDataTransferObjectValidationTests.EXAMPLE_PWD_TEST)),
             cancellationToken: CancellationToken.None);
 
         // Assert

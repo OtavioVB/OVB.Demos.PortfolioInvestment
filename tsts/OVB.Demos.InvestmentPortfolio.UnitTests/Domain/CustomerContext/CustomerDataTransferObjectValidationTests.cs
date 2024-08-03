@@ -4,7 +4,7 @@ namespace OVB.Demos.InvestmentPortfolio.UnitTests.Domain.CustomerContext;
 
 public sealed class CustomerDataTransferObjectValidationTests
 {
-    public const string PASSWORD = "_836hjfk7DH8!";
+    public const string EXAMPLE_PWD_TEST = "_836hjfk7DH8!";
 
     public static Customer CUSTOMER_EXAMPLE = new Customer(
         id: Guid.NewGuid(),

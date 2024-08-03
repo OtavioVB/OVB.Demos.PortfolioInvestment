@@ -5,7 +5,7 @@ namespace OVB.Demos.InvestmentPortfolio.UnitTests.Domain.OperatorContext;
 
 public sealed class OperatorDataTransferObjectValidationTests
 {
-    public const string PASSWORD = "_836hjfk7DH8!";
+    public const string EXAMPLE_PWD_TEST = "_836hjfk7DH8!";
 
     public static Operator OPERATOR_EXAMPLE = new Operator(
             id: Guid.NewGuid(),

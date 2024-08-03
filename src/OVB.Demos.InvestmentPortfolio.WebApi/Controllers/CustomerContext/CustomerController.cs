@@ -15,7 +15,7 @@ namespace OVB.Demos.InvestmentPortfolio.WebApi.Controllers.CustomerContext;
 public sealed class CustomerController : ControllerBase
 {
     [HttpPost]
-    [Consumes(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.FormUrlEncoded)]
     [Route("oauth/token")]
     [AllowAnonymous]
     public async Task<IActionResult> HttpPostOAuthCustomerAuthenticationAsync(
