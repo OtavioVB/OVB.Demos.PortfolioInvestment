@@ -161,7 +161,7 @@ public sealed class FinancialAssetService : IFinancialAssetService
         await _unitOfWork.ApplyDataContextTransactionChangeAsync(cancellationToken);
 
         const string FINANCIAL_ASSET_SUCCESS_NOTIFICATION_CODE = "UPDATE_FINANCIAL_ASSET_SUCCESS";
-        string FINANCIAL_ASSET_SUCCESS_NOTIFICATION_MESSAGE = string.Format("O ativo financeiro {0} foi atualizado com sucesso.", financialAsset.Symbol);
+        string FINANCIAL_ASSET_SUCCESS_NOTIFICATION_MESSAGE = string.Format("O ativo financeiro {0} foi atualizado com sucesso.", financialAsset.Symbol.GetSymbol());
 
         return MethodResult<INotification, UpdateFinancialAssetServiceOutput>.FactorySuccess(
             output: UpdateFinancialAssetServiceOutput.Factory(

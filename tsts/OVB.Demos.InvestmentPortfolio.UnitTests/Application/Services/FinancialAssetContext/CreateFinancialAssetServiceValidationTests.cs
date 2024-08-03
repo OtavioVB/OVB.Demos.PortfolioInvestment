@@ -17,7 +17,7 @@ public sealed class CreateFinancialAssetServiceValidationTests
         var input = CreateFinancialAssetServiceInput.Factory(
             operatorId: IdentityValueObject.Factory(),
             symbol: financialAsset.Symbol,
-            description: financialAsset.Description,
+            description: financialAsset.Description!.Value,
             expirationDate: financialAsset.ExpirationDate,
             index: financialAsset.Index,
             type: financialAsset.Type,
@@ -58,7 +58,7 @@ public sealed class CreateFinancialAssetServiceValidationTests
         var input = CreateFinancialAssetServiceInput.Factory(
             operatorId: IdentityValueObject.Factory(),
             symbol: financialAsset.Symbol,
-            description: financialAsset.Description,
+            description: financialAsset.Description!.Value,
             expirationDate: financialAsset.ExpirationDate,
             index: financialAsset.Index,
             type: financialAsset.Type,

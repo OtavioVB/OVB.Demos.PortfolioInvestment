@@ -15,7 +15,7 @@ namespace OVB.Demos.InvestmentPortfolio.WebApi.Controllers.OperatorContext;
 public sealed class OperatorController : ControllerBase
 {
     [HttpPost]
-    [Consumes(MediaTypeNames.Multipart.FormData)]
+    [Consumes(MediaTypeNames.Application.FormUrlEncoded)]
     [Route("oauth/token")]
     [AllowAnonymous]
     public async Task<IActionResult> HttpPostOAuthOperatorAuthenticationAsync(

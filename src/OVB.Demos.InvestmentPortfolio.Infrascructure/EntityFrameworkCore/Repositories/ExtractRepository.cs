@@ -12,5 +12,5 @@ public sealed class ExtractRepository : BaseRepository<Extract>, IExtensionExtra
     }
 
     public override Task<Extract?> GetEntityByIdAsync(Guid id, CancellationToken cancellationToken)
-        => _dataContext.Set<Extract>().Where(p => p.Id.GetIdentity() == id).FirstOrDefaultAsync(cancellationToken);
+        => _dataContext.Set<Extract>().Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
 }

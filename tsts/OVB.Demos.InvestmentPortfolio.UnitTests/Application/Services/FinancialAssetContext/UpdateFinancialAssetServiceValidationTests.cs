@@ -19,7 +19,7 @@ public sealed class UpdateFinancialAssetServiceValidationTests
             operatorId: IdentityValueObject.Factory(),
             financialAssetId: IdentityValueObject.Factory(),
             symbol: financialAsset.Symbol,
-            description: financialAsset.Description,
+            description: financialAsset.Description!.Value,
             expirationDate: financialAsset.ExpirationDate,
             status: financialAsset.Status,
             interestRate: financialAsset.InterestRate,
@@ -33,7 +33,7 @@ public sealed class UpdateFinancialAssetServiceValidationTests
             unitOfWork: new FakerUnitOfWork());
 
         const string EXPECTED_SUCCESS_NOTIFICATION_CODE = "UPDATE_FINANCIAL_ASSET_SUCCESS";
-        string EXPECTED_SUCCESS_NOTIFICATION_MESSAGE = string.Format("O ativo financeiro {0} foi atualizado com sucesso.", input.Symbol);
+        string EXPECTED_SUCCESS_NOTIFICATION_MESSAGE = string.Format("O ativo financeiro {0} foi atualizado com sucesso.", input.Symbol!.Value.GetSymbol());
         const string EXPECTED_SUCCESS_NOTIFICATION_TYPE = "Success";
 
         // Act
@@ -59,7 +59,7 @@ public sealed class UpdateFinancialAssetServiceValidationTests
             operatorId: IdentityValueObject.Factory(),
             financialAssetId: IdentityValueObject.Factory(),
             symbol: financialAsset.Symbol,
-            description: financialAsset.Description,
+            description: financialAsset.Description!.Value,
             expirationDate: financialAsset.ExpirationDate,
             status: financialAsset.Status,
             interestRate: financialAsset.InterestRate,
@@ -100,7 +100,7 @@ public sealed class UpdateFinancialAssetServiceValidationTests
             operatorId: IdentityValueObject.Factory(),
             financialAssetId: IdentityValueObject.Factory(),
             symbol: "NTIDH",
-            description: financialAsset.Description,
+            description: financialAsset.Description!.Value,
             expirationDate: financialAsset.ExpirationDate,
             status: financialAsset.Status,
             interestRate: financialAsset.InterestRate,

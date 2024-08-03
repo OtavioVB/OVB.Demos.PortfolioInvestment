@@ -49,7 +49,7 @@ public sealed class FinancialAssetDataTransferObjectValidationTests
         financialAsset.Operator = OperatorDataTransferObjectValidationTests.OPERATOR_EXAMPLE;
 
         // Assert
-        Assert.Equal(financialAssetId, financialAsset.Id);
+        Assert.Equal<Guid>(financialAssetId, financialAsset.Id);
         Assert.Equal(symbol, financialAsset.Symbol);
         Assert.Equal(description, financialAsset.Description);
         Assert.Equal(expirationDateConvert, financialAsset.ExpirationDate);

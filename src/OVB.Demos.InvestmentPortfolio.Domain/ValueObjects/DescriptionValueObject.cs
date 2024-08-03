@@ -18,6 +18,8 @@ public readonly struct DescriptionValueObject
 
     public const int MAX_LENGTH = 64;
 
+    public static DescriptionValueObject Nullable => DescriptionValueObject.Factory(null);
+
     private const string DESCRIPTION_LENGTH_CANNOT_BE_GREATHER_THE_MAXIMUM_ALLOWED_NOTIFICATION_CODE = "DESCRIPTION_LENGTH_CANNOT_BE_GREATHER_THE_MAXIMUM_ALLOWED";
     private static string DESCRIPTION_LENGTH_CANNOT_BE_GREATHER_THE_MAXIMUM_ALLOWED_NOTIFICATION_MESSAGE => $"A descrição não pode conter mais que {MAX_LENGTH} caracteres.";
 

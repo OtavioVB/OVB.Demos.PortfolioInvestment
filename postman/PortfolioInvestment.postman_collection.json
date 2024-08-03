@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "8d1c3257-4296-4bd3-a778-b6b80db59bf6",
+		"name": "PortfolioInvestment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32261270",
+		"_collection_link": "https://www.postman.com/gasbram/workspace/otvio-carmanini/collection/32261270-8d1c3257-4296-4bd3-a778-b6b80db59bf6?action=share&source=collection_link&creator=32261270"
+	},
+	"item": [
+		{
+			"name": "OPERADORES",
+			"item": [
+				{
+					"name": "OAuth 2.0 Autenticação",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "otaviovb.developer@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "_836hjfk7DH8!",
+									"type": "text"
+								},
+								{
+									"key": "grantType",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{baseUri}}/api/v1/operators/oauth/token",
+							"protocol": "https",
+							"host": [
+								"{{baseUri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"operators",
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ATIVOS FINANCEIROS",
+			"item": [
+				{
+					"name": "Consultar Ativos Financeiros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{baseUri}}/api/v1/financial-assets",
+							"protocol": "https",
+							"host": [
+								"{{baseUri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"financial-assets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Ativo Financeiro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{operatorAccessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"symbol\": \"LCI/LCA\",\r\n  \"description\": \"Títulos de renda fixa emitidos por instituições financeiras.\",\r\n  \"expirationDate\": \"2024-08-29\",\r\n  \"index\": \"CDI\",\r\n  \"type\": \"PRE_FIXED\",\r\n  \"status\": \"ACTIVE\",\r\n  \"interestRate\": 2.654,\r\n  \"unitaryPrice\": 5,\r\n  \"quantityAvailable\": 1785.571\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUri}}/api/v1/financial-assets",
+							"protocol": "https",
+							"host": [
+								"{{baseUri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"financial-assets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Ativo Financeiro",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{operatorAccessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"symbol\": \"LCI/LCA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUri}}/api/v1/financial-assets/{{financialAssetId}}",
+							"protocol": "https",
+							"host": [
+								"{{baseUri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"financial-assets",
+								"{{financialAssetId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

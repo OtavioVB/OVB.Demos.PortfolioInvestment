@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports: 
+      - 5432:5432
+    environment:
+      POSTGRES_USER: suporte@postgres.com.br
+      POSTGRES_PASSWORD: postgres@123
+    restart: always
+    networks:
+      - portfolio-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    user: root
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "suporte@postgres.com.br"
+      PGADMIN_DEFAULT_PASSWORD: "postgres@123"
+    ports:
+      - 17000:80
+    restart: always
+    depends_on:
+      - postgres
+    networks:
+      - portfolio-network
+
+networks:
+  portfolio-network:
+    driver: bridge

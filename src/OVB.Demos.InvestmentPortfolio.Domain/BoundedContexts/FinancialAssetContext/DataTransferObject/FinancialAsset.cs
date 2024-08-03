@@ -11,7 +11,7 @@ public sealed record FinancialAsset
 {
     public IdentityValueObject Id { get; set; }
     public AssetSymbolValueObject Symbol { get; set; }
-    public DescriptionValueObject Description { get; set; }
+    public DescriptionValueObject? Description { get; set; }
     public AssetExpirationDateValueObject ExpirationDate { get; set; }
     public AssetIndexValueObject Index { get; set; }
     public AssetTypeValueObject Type { get; set; }
@@ -22,7 +22,7 @@ public sealed record FinancialAsset
 
     public FinancialAsset(
         IdentityValueObject id, AssetSymbolValueObject symbol, 
-        DescriptionValueObject description, AssetExpirationDateValueObject expirationDate, AssetIndexValueObject index, AssetTypeValueObject type, 
+        DescriptionValueObject? description, AssetExpirationDateValueObject expirationDate, AssetIndexValueObject index, AssetTypeValueObject type, 
         AssetStatusValueObject status, InterestRateValueObject interestRate, UnitaryPriceValueObject unitaryPrice, QuantityAvailableValueObject quantityAvailable)
     {
         Id = id;

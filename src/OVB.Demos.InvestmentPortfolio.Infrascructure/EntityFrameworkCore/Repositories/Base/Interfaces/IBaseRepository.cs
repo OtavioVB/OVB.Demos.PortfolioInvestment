@@ -1,4 +1,6 @@
-﻿namespace OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Base.Interfaces;
+﻿using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
+
+namespace OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Base.Interfaces;
 
 public interface IBaseRepository<TEntity>
     where TEntity : class

@@ -43,4 +43,6 @@ public readonly struct IdentityValueObject
         => Factory(obj);
     public static implicit operator string(IdentityValueObject obj)
         => obj.GetIdentityAsString();
+    public static implicit operator Guid(IdentityValueObject obj)
+        => obj.GetIdentity();
 }

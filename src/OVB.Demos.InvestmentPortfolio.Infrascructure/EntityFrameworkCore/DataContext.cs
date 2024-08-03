@@ -9,14 +9,14 @@ using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Mappings;
 
 namespace OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore;
 
-public class DataContext : DbContext
+public sealed class DataContext : DbContext
 {
-    public virtual DbSet<Customer> Customers { get; set; }
-    public virtual DbSet<Extract> Extracts { get; set; }
-    public virtual DbSet<Operator> Operators { get; set; }
-    public virtual DbSet<FinancialAsset> FinancialAssets { get; set; }
-    public virtual DbSet<Order> Orders { get; set; }
-    public virtual DbSet<Portfolio> Portfolios { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Extract> Extracts { get; set; }
+    public DbSet<Operator> Operators { get; set; }
+    public DbSet<FinancialAsset> FinancialAssets { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<Portfolio> Portfolios { get; set; }
 
     public DataContext(DbContextOptions options) : base(options)
     {
