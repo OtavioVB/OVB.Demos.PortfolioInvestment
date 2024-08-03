@@ -170,4 +170,32 @@ public sealed class FinancialAssetService : IFinancialAssetService
                 code: FINANCIAL_ASSET_SUCCESS_NOTIFICATION_CODE,
                 message: FINANCIAL_ASSET_SUCCESS_NOTIFICATION_MESSAGE)]);
     }
+
+    public async Task<MethodResult<INotification, QueryFinancialAssetServiceOutput>> QueryFinancialAssetServiceAsync(
+        QueryFinancialAssetServiceInput input, 
+        CancellationToken cancellationToken)
+    {
+        var inputValidationResult = input.GetInputValidationResult();
+
+        if (inputValidationResult.IsError)
+            return MethodResult<INotification, QueryFinancialAssetServiceOutput>.FactoryError(
+                notifications: inputValidationResult.Notifications);
+
+        var queryFinancialAssetsResult = await _extensionFinancialAssetRepository.QueryFinancialAssetAsNoTrackingByPaginationAsync(
+            page: input.Page,
+            offset: input.Offset,
+            cancellationToken: cancellationToken);
+
+        const string QUERY_FINANCIAL_ASSETS_SUCCESS_NOTIFICATION_CODE = "QUERY_FINANCIAL_ASSETS_SUCCESS";
+        const string QUERY_FINANCIAL_ASSETS_SUCCESS_NOTIFICATION_MESSAGE = "A consulta dos ativos financeiros foi realizada com sucesso.";
+
+        return MethodResult<INotification, QueryFinancialAssetServiceOutput>.FactorySuccess(
+            notifications: [Notification.FactorySuccess(
+                code: QUERY_FINANCIAL_ASSETS_SUCCESS_NOTIFICATION_CODE,
+                message: QUERY_FINANCIAL_ASSETS_SUCCESS_NOTIFICATION_MESSAGE)],
+            output: QueryFinancialAssetServiceOutput.Factory(
+                page: input.Page,
+                offset: input.Offset,
+                financialAssets: queryFinancialAssetsResult));
+    }
 }
