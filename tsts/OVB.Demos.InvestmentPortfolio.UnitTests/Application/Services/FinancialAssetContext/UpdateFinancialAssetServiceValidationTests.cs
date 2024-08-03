@@ -30,7 +30,8 @@ public sealed class UpdateFinancialAssetServiceValidationTests
                 existsSymbol: false),
             baseFinancialAssetRepository: new FakerExtensionFinancialAssetRepository(
                 existsSymbol: false),
-            unitOfWork: new FakerUnitOfWork());
+            unitOfWork: new FakerUnitOfWork(),
+            sendEmailApiKey: string.Empty);
 
         const string EXPECTED_SUCCESS_NOTIFICATION_CODE = "UPDATE_FINANCIAL_ASSET_SUCCESS";
         string EXPECTED_SUCCESS_NOTIFICATION_MESSAGE = string.Format("O ativo financeiro {0} foi atualizado com sucesso.", input.Symbol!.Value.GetSymbol());
@@ -71,7 +72,8 @@ public sealed class UpdateFinancialAssetServiceValidationTests
             baseFinancialAssetRepository: new FakerExtensionFinancialAssetRepository(
                 existsSymbol: false,
                 existsFinancialAssetOnGet: false),
-            unitOfWork: new FakerUnitOfWork());
+            unitOfWork: new FakerUnitOfWork(),
+            sendEmailApiKey: string.Empty);
 
         const string EXPECTED_ERROR_NOTIFICATION_CODE = "FINANCIAL_ASSET_NOT_FOUND";
         const string EXPECTED_ERROR_NOTIFICATION_MESSAGE = "O ativo financeiro enviado não foi possível ser encontrado.";
@@ -113,7 +115,8 @@ public sealed class UpdateFinancialAssetServiceValidationTests
             baseFinancialAssetRepository: new FakerExtensionFinancialAssetRepository(
                 existsSymbol: true,
                 existsFinancialAssetOnGet: true),
-            unitOfWork: new FakerUnitOfWork());
+            unitOfWork: new FakerUnitOfWork(),
+            sendEmailApiKey: string.Empty);
 
         const string EXPECTED_ERROR_NOTIFICATION_CODE = "FINANCIAL_ASSET_ALREADY_EXISTS_WITH_SYMBOL";
         const string EXPECTED_ERROR_NOTIFICATION_MESSAGE = "O ativo financeiro enviado já existe para o símbolo associado enviado.";

@@ -18,7 +18,8 @@ public sealed class QueryFinancialAssetServiceValidationTests
             baseFinancialAssetRepository: new FakerExtensionFinancialAssetRepository(
                 existsSymbol: false,
                 existsFinancialAssetOnGet: true),
-            unitOfWork: new FakerUnitOfWork());
+            unitOfWork: new FakerUnitOfWork(),
+            sendEmailApiKey: string.Empty);
 
         const int PAGE = 5;
         const int OFFSET = 25;

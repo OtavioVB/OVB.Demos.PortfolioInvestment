@@ -1,5 +1,6 @@
 ﻿using OVB.Demos.InvestmentPortfolio.Application.Services.FinancialAssetContext.Inputs;
 using OVB.Demos.InvestmentPortfolio.Application.Services.FinancialAssetContext.Interfaces;
+using OVB.Demos.InvestmentPortfolio.Application.Services.FinancialAssetContext.Models;
 using OVB.Demos.InvestmentPortfolio.Application.Services.FinancialAssetContext.Outputs;
 using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.FinancialAssetContext.DataTransferObject;
 using OVB.Demos.InvestmentPortfolio.Domain.Utils.MethodResultContext;
@@ -9,6 +10,7 @@ using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Base.Interfaces;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Extensions;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.UnitOfWork.Interfaces;
+using System.Net.Http;
 
 namespace OVB.Demos.InvestmentPortfolio.Application.Services.FinancialAssetContext;
 
@@ -17,15 +19,18 @@ public sealed class FinancialAssetService : IFinancialAssetService
     private readonly IExtensionFinancialAssetRepository _extensionFinancialAssetRepository;
     private readonly IBaseRepository<FinancialAsset> _baseFinancialAssetRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly string _sendEmailApiKey;
 
     public FinancialAssetService(
         IExtensionFinancialAssetRepository extensionFinancialAssetRepository, 
         IBaseRepository<FinancialAsset> baseFinancialAssetRepository,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        string sendEmailApiKey)
     {
         _extensionFinancialAssetRepository = extensionFinancialAssetRepository;
         _baseFinancialAssetRepository = baseFinancialAssetRepository;
         _unitOfWork = unitOfWork;
+        _sendEmailApiKey = sendEmailApiKey; 
     }
 
     public async Task<MethodResult<INotification, CreateFinancialAssetServiceOutput>> CreateFinancialAssetServiceAsync(
@@ -197,5 +202,80 @@ public sealed class FinancialAssetService : IFinancialAssetService
                 page: input.Page,
                 offset: input.Offset,
                 financialAssets: queryFinancialAssetsResult));
+    }
+
+    public async Task<MethodResult<INotification>> AdviceFinancialAssetUpcomingExpirationDateAsync(
+        CancellationToken cancellationToken)
+    {
+        const int ADVICE_REQUIRED_EXPIRATION_UPCOMING_DAYS = 15;
+
+        var queryFinancialAssetsUpcomingExpirationDateResult = await _extensionFinancialAssetRepository.QueryFinancialAssetAsNoTrackingWhenExpirationDateIsLessThanExpectedDateIncludingOperatorsAsync(
+            expirationDateExpected: DateTime.UtcNow.Date.AddDays(ADVICE_REQUIRED_EXPIRATION_UPCOMING_DAYS),
+            cancellationToken: cancellationToken);
+
+        const string FINANCIAL_ASSET_ADVICE_NOT_FOUND_NOTIFICATION_CODE = "FINANCIAL_ASSET_ADVICE_NOT_FOUND";
+        const string FINANCIAL_ASSET_ADVICE_NOT_FOUND_NOTIFICATION_MESSAGE = "Nenhum aviso de vencimento próximo de algum ativo financeiro foi encontrado para ser enviado para os operadores gestores.";
+
+        if (queryFinancialAssetsUpcomingExpirationDateResult.Length == 0)
+            return MethodResult<INotification>.FactorySuccess(
+                notifications: [Notification.FactoryInformation(
+                    code: FINANCIAL_ASSET_ADVICE_NOT_FOUND_NOTIFICATION_CODE,
+                    message: FINANCIAL_ASSET_ADVICE_NOT_FOUND_NOTIFICATION_MESSAGE)]);
+
+        foreach (var financialAsset in queryFinancialAssetsUpcomingExpirationDateResult)
+        {
+            _ = SendEmailAboutAdviceExpirationFinancialAsset(
+                destinationEmail: financialAsset.Operator!.Email,
+                symbol: financialAsset.Symbol,
+                financialAssetId: financialAsset.Id,
+                operatorName: financialAsset.Operator.Name,
+                expirationDate: financialAsset.ExpirationDate);
+        }
+
+        const string FINANCIAL_ASSET_ADVICE_HAS_SENT_SUCCESS_NOTIFICATION_CODE = "FINANCIAL_ASSET_ADVICE_HAS_SENT_SUCCESS";
+        const string FINANCIAL_ASSET_ADVICE_HAS_SENT_SUCCESS_NOTIFICATION_MESSAGE = "Todos os avisos de vencimento próximo de ativos financeiros foram enviados para os gestores.";
+
+        return MethodResult<INotification>.FactorySuccess(
+            notifications: [Notification.FactorySuccess(
+                code: FINANCIAL_ASSET_ADVICE_HAS_SENT_SUCCESS_NOTIFICATION_CODE,
+                message: FINANCIAL_ASSET_ADVICE_HAS_SENT_SUCCESS_NOTIFICATION_MESSAGE)]);
+    }
+
+    private async Task SendEmailAboutAdviceExpirationFinancialAsset(
+        EmailValueObject destinationEmail,
+        AssetSymbolValueObject symbol,
+        IdentityValueObject financialAssetId,
+        NameValueObject operatorName,
+        AssetExpirationDateValueObject expirationDate)
+    {
+        const string FROM_EMAIL = "onboarding@resend.dev";
+        const string ENDPOINT = "https://api.resend.com/emails";
+        const string DESTINATION_EMAIL_ALLOWED = "contato.otaviovbsc@gmail.com";
+
+        const string REQUIRED_HEADER_AUTHORIZATION_NAME = "Authorization";
+
+        using var httpClient = HttpClientFactory.Create();
+
+        httpClient.DefaultRequestHeaders.Add(
+            name: REQUIRED_HEADER_AUTHORIZATION_NAME,
+            value: _sendEmailApiKey);
+
+        string SUBJECT = string.Format("Aviso de Expiração do Ativo Financeiro {0}", symbol.GetSymbol());
+        string HTML = string.Format("Prezado {0} inscrito como operador gestor na plataforma sobre o email {1}, o ativo financeiro '{2}' identificado por {3} expirará logo mais. Esteja atento ao prazo de expiração, que acontecerá '{4}'. Atenciosamente, Portfólio de Investimentos", 
+            operatorName.GetName(), 
+            destinationEmail.GetEmail(),
+            symbol.GetSymbol(),
+            financialAssetId.GetIdentityAsString(),
+            expirationDate.GetExpirationDateAsString());
+
+        var email = SendEmailModel.Factory(
+            from: FROM_EMAIL,
+            to: DESTINATION_EMAIL_ALLOWED,
+            subject: SUBJECT,
+            html: HTML);
+
+        await httpClient.PostAsJsonAsync(
+            requestUri: ENDPOINT,
+            value: email);
     }
 }

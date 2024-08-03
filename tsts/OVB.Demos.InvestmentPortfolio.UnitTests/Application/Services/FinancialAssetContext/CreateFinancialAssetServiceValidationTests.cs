@@ -30,7 +30,8 @@ public sealed class CreateFinancialAssetServiceValidationTests
                 existsSymbol: false),
             baseFinancialAssetRepository: new FakerExtensionFinancialAssetRepository(
                 existsSymbol: false),
-            unitOfWork: new FakerUnitOfWork());
+            unitOfWork: new FakerUnitOfWork(),
+            sendEmailApiKey: string.Empty);
 
         const string EXPECTED_SUCCESS_NOTIFICATION_CODE = "FINANCIAL_ASSET_CREATED_SUCCESS";
         const string EXPECTED_SUCCESS_NOTIFICATION_MESSAGE = "O ativo financeiro enviado foi cadastrado com sucesso.";
@@ -71,7 +72,8 @@ public sealed class CreateFinancialAssetServiceValidationTests
                 existsSymbol: true),
             baseFinancialAssetRepository: new FakerExtensionFinancialAssetRepository(
                 existsSymbol: false),
-            unitOfWork: new FakerUnitOfWork());
+            unitOfWork: new FakerUnitOfWork(),
+            sendEmailApiKey: string.Empty);
 
         const string EXPECTED_ERROR_NOTIFICATION_CODE = "FINANCIAL_ASSET_ALREADY_EXISTS_WITH_SYMBOL";
         const string EXPECTED_ERROR_NOTIFICATION_MESSAGE = "O ativo financeiro enviado já existe para o símbolo associado enviado.";
@@ -112,7 +114,8 @@ public sealed class CreateFinancialAssetServiceValidationTests
                 existsSymbol: false),
             baseFinancialAssetRepository: new FakerExtensionFinancialAssetRepository(
                 existsSymbol: false),
-            unitOfWork: new FakerUnitOfWork());
+            unitOfWork: new FakerUnitOfWork(),
+            sendEmailApiKey: string.Empty);
 
         var methodResult = input.GetInputValidationResult();
 

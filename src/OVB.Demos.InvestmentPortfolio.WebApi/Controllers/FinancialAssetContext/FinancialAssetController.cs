@@ -17,6 +17,33 @@ public sealed class FinancialAssetController : ControllerBase
 {
     [HttpPost]
     [Consumes(MediaTypeNames.Application.Json)]
+    [Route("advices")]
+    [AllowAnonymous]
+    public async Task<IActionResult> HttpPostAdviceFinancialUpcommingExpirationDateAsync(
+        [FromHeader(Name = "X-Administrator-Key")] string administratorKey,
+        [FromServices] IFinancialAssetService financialAssetService,
+        CancellationToken cancellationToken)
+    {
+        const string ADMINISTRATOR_KEY = "XLkNQ8h23I73KV8KXw1UrdyiKVhJi7yg";
+
+        if (administratorKey != ADMINISTRATOR_KEY)
+            return Unauthorized();
+
+        var serviceResult = await financialAssetService.AdviceFinancialAssetUpcomingExpirationDateAsync(
+            cancellationToken: cancellationToken);
+
+        if (serviceResult.IsError)
+            return StatusCode(
+                statusCode: StatusCodes.Status400BadRequest,
+                value: serviceResult.Notifications);
+
+        return StatusCode(
+            statusCode: StatusCodes.Status200OK,
+            value: serviceResult.Notifications);
+    }
+
+    [HttpPost]
+    [Consumes(MediaTypeNames.Application.Json)]
     [Authorize(Roles = nameof(Operator))]
     public async Task<IActionResult> HttpPostCreateFinancialAssetAsync(
         [FromServices] IFinancialAssetService financialAssetService,
