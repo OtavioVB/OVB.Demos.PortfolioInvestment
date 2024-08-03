@@ -20,12 +20,12 @@ public readonly struct MethodResult<TNotification>
         Notifications = notifications;
     }
 
-    public static MethodResult<TNotification> Factory(MethodResultType type, TNotification[]? notifications = null)
-        => new MethodResult<TNotification>(type, notifications ?? []);
     public static MethodResult<TNotification> FactoryError(TNotification[]? notifications = null)
         => Factory(MethodResultType.Error, notifications);
     public static MethodResult<TNotification> FactorySuccess(TNotification[]? notifications = null)
         => Factory(MethodResultType.Success, notifications);
+    public static MethodResult<TNotification> Factory(MethodResultType type, TNotification[]? notifications = null)
+        => new MethodResult<TNotification>(type, notifications ?? []);
     public static MethodResult<TNotification> Factory(params MethodResult<TNotification>[] processResults)
     {
 
@@ -91,12 +91,12 @@ public readonly struct MethodResult<TNotification, TOutput>
         Output = output;
     }
 
-    public static MethodResult<TNotification, TOutput> Factory(MethodResultType type, TNotification[]? notifications = null, TOutput? output = default)
-        => new MethodResult<TNotification, TOutput>(type, notifications ?? [], output);
     public static MethodResult<TNotification, TOutput> FactoryError(TNotification[]? notifications = null, TOutput? output = default)
         => Factory(MethodResultType.Error, notifications, output);
     public static MethodResult<TNotification, TOutput> FactorySuccess(TNotification[]? notifications = null, TOutput? output = default)
         => Factory(MethodResultType.Success, notifications, output);
+    public static MethodResult<TNotification, TOutput> Factory(MethodResultType type, TNotification[]? notifications = null, TOutput? output = default)
+        => new MethodResult<TNotification, TOutput>(type, notifications ?? [], output);
     public static MethodResult<TNotification, TOutput> Factory(
         TOutput? output = default,
         params MethodResult<TNotification>[] processResults)

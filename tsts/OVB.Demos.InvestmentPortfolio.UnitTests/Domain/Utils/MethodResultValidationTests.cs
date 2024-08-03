@@ -61,4 +61,54 @@ public sealed class MethodResultValidationTests
         Assert.True(methodResult.IsError);
         Assert.Equal(MethodResultType.Error, methodResult.Type);
     }
+
+    [Fact]
+    public void Method_Result_Value_Object_Should_Be_Valid_When_Created_By_Anothers_Method_Result_And_Output_Should_Be_Success()
+    {
+        // Arrange
+        INotification[] notifications = { Notification.FactorySuccess(
+            code: "SCS9348JH",
+            message: "Factory Success") };
+        var methodResult = MethodResult<INotification>.FactorySuccess(
+            notifications: notifications);
+        const string EXPECTED_OUTPUT = "output";
+
+        // Act
+        var methodResultIncremental = MethodResult<INotification, string>.Factory(
+            output: EXPECTED_OUTPUT,
+            methodResult);
+
+        // Assert
+        Assert.Equal(EXPECTED_OUTPUT, methodResultIncremental.Output);
+        Assert.True(methodResultIncremental.IsSuccess);
+        Assert.Equal(notifications, methodResultIncremental.Notifications);
+    }
+
+    [Fact]
+    public void Method_Result_Value_Object_Should_Be_Valid_When_Created_By_Anothers_Method_Result_And_Output_Should_Be_Error()
+    {
+        // Arrange
+        INotification[] notifications = { Notification.FactorySuccess(
+            code: "SCS9348JH",
+            message: "Factory Success") };
+        INotification[] notifications2 = { Notification.FactoryFailure(
+            code: "FAIL9348JH",
+            message: "Factory Failure") };
+        var methodResult = MethodResult<INotification>.FactorySuccess(
+            notifications: notifications);
+        var methodResult2 = MethodResult<INotification>.FactoryError(
+            notifications: notifications2);
+
+        const string EXPECTED_OUTPUT = "output";
+
+        // Act
+        var methodResultIncremental = MethodResult<INotification, string>.Factory(
+            output: EXPECTED_OUTPUT,
+            methodResult, methodResult2);
+
+        // Assert
+        Assert.Equal(EXPECTED_OUTPUT, methodResultIncremental.Output);
+        Assert.False(methodResultIncremental.IsSuccess);
+        Assert.NotEqual(notifications, methodResultIncremental.Notifications);
+    }
 }
