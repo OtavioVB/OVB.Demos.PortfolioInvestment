@@ -20,18 +20,15 @@ public sealed class CustomerService : ICustomerService
 {
     private readonly string _jwtBearerIssuerSigningKey;
     private readonly string _passwordHashPrivateKey;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IExtensionCustomerRepository _extensionCustomerRepository;
 
     public CustomerService(
         string jwtBearerIssuerSigningKey,
         string passwordHashPrivateKey,
-        IUnitOfWork unitOfWork, 
         IExtensionCustomerRepository extensionCustomerRepository)
     {
         _jwtBearerIssuerSigningKey = jwtBearerIssuerSigningKey;
         _passwordHashPrivateKey = passwordHashPrivateKey;
-        _unitOfWork = unitOfWork;
         _extensionCustomerRepository = extensionCustomerRepository;
     }
 

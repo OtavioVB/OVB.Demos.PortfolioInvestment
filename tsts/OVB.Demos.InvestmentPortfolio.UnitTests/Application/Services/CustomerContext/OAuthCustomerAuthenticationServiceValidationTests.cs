@@ -16,7 +16,6 @@ public sealed class OAuthCustomerAuthenticationServiceValidationTests
         var customerService = new CustomerService(
             jwtBearerIssuerSigningKey: PasswordValueObjectValidationTests.PRIVATE_KEY,
             passwordHashPrivateKey: PasswordValueObjectValidationTests.PRIVATE_KEY,
-            unitOfWork: new FakerUnitOfWork(),
             extensionCustomerRepository: new FakerExtensionCustomerRepository(
                 customerExists: true));
         const string EXPECTED_GRANT_TYPE = "password";
@@ -55,7 +54,6 @@ public sealed class OAuthCustomerAuthenticationServiceValidationTests
         var customerService = new CustomerService(
             jwtBearerIssuerSigningKey: PasswordValueObjectValidationTests.PRIVATE_KEY,
             passwordHashPrivateKey: PasswordValueObjectValidationTests.PRIVATE_KEY,
-            unitOfWork: new FakerUnitOfWork(),
             extensionCustomerRepository: new FakerExtensionCustomerRepository(
                 customerExists: true));
         const string EXPECTED_GRANT_TYPE = "password";
@@ -89,7 +87,6 @@ public sealed class OAuthCustomerAuthenticationServiceValidationTests
         var customerService = new CustomerService(
             jwtBearerIssuerSigningKey: PasswordValueObjectValidationTests.PRIVATE_KEY,
             passwordHashPrivateKey: PasswordValueObjectValidationTests.PRIVATE_KEY,
-            unitOfWork: new FakerUnitOfWork(),
             extensionCustomerRepository: new FakerExtensionCustomerRepository(
                 customerExists: false));
         const string EXPECTED_GRANT_TYPE = "password";
@@ -123,7 +120,6 @@ public sealed class OAuthCustomerAuthenticationServiceValidationTests
         var customerService = new CustomerService(
             jwtBearerIssuerSigningKey: PasswordValueObjectValidationTests.PRIVATE_KEY,
             passwordHashPrivateKey: PasswordValueObjectValidationTests.PRIVATE_KEY,
-            unitOfWork: new FakerUnitOfWork(),
             extensionCustomerRepository: new FakerExtensionCustomerRepository(
                 customerExists: true));
         const string EXPECTED_GRANT_TYPE = "pard";
