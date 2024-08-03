@@ -14,10 +14,10 @@ public sealed class OAuthOperatorAuthenticationServiceInputValidationTests
         // Arrange
         const string EXPECTED_GRANT_TYPE = "password";
         const string EXPECTED_EMAIL = "otaviovb.developer@gmail.com";
-        const string EXPECTED_PASSWORD = "994jF%9adh$%";
+        const string EXPECTED_PWD = "994jF%9adh$%";
 
         GrantTypeValueObject grantType = EXPECTED_GRANT_TYPE;
-        PasswordValueObject password = PasswordValueObject.Factory(EXPECTED_PASSWORD);
+        PasswordValueObject password = PasswordValueObject.Factory(EXPECTED_PWD);
         EmailValueObject email = EXPECTED_EMAIL;
 
         // Act

@@ -59,11 +59,11 @@ public sealed class OAuthCustomerAuthenticationServiceValidationTests
             extensionCustomerRepository: new FakerExtensionCustomerRepository(
                 customerExists: true));
         const string EXPECTED_GRANT_TYPE = "password";
-        const string NOT_VALID_PASSWORD = "KJdsj85#lçx_";
+        const string NOT_VALID_PWD = "KJdsj85#lçx_";
 
         var input = OAuthCustomerAuthenticationServiceInput.Factory(
             email: CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE.Email,
-            password: PasswordValueObject.Factory(NOT_VALID_PASSWORD),
+            password: PasswordValueObject.Factory(NOT_VALID_PWD),
             grantType: EXPECTED_GRANT_TYPE);
 
         const string EXPECTED_CODE = "CUSTOMER_CREDENTIALS_IS_NOT_VALID";
@@ -93,11 +93,11 @@ public sealed class OAuthCustomerAuthenticationServiceValidationTests
             extensionCustomerRepository: new FakerExtensionCustomerRepository(
                 customerExists: false));
         const string EXPECTED_GRANT_TYPE = "password";
-        const string NOT_VALID_PASSWORD = "KJdsj85#lçx_";
+        const string NOT_VALID_PWD = "KJdsj85#lçx_";
 
         var input = OAuthCustomerAuthenticationServiceInput.Factory(
             email: CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE.Email,
-            password: PasswordValueObject.Factory(NOT_VALID_PASSWORD),
+            password: PasswordValueObject.Factory(NOT_VALID_PWD),
             grantType: EXPECTED_GRANT_TYPE);
 
         const string EXPECTED_CODE = "CUSTOMER_NOT_FOUND";
