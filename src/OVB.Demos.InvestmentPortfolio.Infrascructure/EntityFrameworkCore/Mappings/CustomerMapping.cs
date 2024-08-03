@@ -49,6 +49,12 @@ public sealed class CustomerMapping : IEntityTypeConfiguration<Customer>
             .HasMaxLength(Guid.Empty.ToString().Length)
             .HasConversion(p => p.GetIdentityAsString(), p => IdentityValueObject.Factory(Guid.Parse(p)))
             .ValueGeneratedNever();
+        builder.Property(p => p.CreatedAt)
+            .IsRequired(true)
+            .IsFixedLength(false)
+            .HasColumnType("TIMESTAMPTZ")
+            .HasColumnName("created_at")
+            .ValueGeneratedNever();
         builder.Property(p => p.Code)
             .IsRequired(true)
             .IsFixedLength(false)
@@ -80,6 +86,20 @@ public sealed class CustomerMapping : IEntityTypeConfiguration<Customer>
             .HasColumnName("email")
             .HasMaxLength(EmailValueObject.MAX_LENGTH)
             .HasConversion(p => p.GetEmail(), p => EmailValueObject.Factory(p))
+            .ValueGeneratedNever();
+        builder.Property(p => p.PasswordHash)
+            .IsFixedLength(true)
+            .IsRequired(true)
+            .HasColumnName("password_hash")
+            .HasColumnType("CHAR")
+            .HasMaxLength(64)
+            .ValueGeneratedNever();
+        builder.Property(p => p.Salt)
+            .IsFixedLength(false)
+            .IsRequired(true)
+            .HasColumnName("password_salt")
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(64)
             .ValueGeneratedNever();
 
         #endregion
