@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "OVB.Demos.InvestmentPortfolio.Scheduler": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7289"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 34490,
+      "useSSL": false
+    }
+  }
+}
