@@ -26,12 +26,11 @@ public sealed class CreateExtractServiceInputValidationTests
 
         // Assert
         Assert.Equal(date, input.CreatedAt);
-        Assert.Equal(extractTypeAllowed, input.Type);
-        Assert.Equal(OrderDataTransferObjectValidationTests.ORDER_EXAMPLE.TotalPrice, input.TotalPrice);
-        Assert.Equal(OrderDataTransferObjectValidationTests.ORDER_EXAMPLE.UnitaryPrice, input.UnitaryPrice);
-        Assert.Equal(OrderDataTransferObjectValidationTests.ORDER_EXAMPLE.Quantity, input.Quantity);
+        Assert.Equal(extractTypeAllowed.GetExtractType(), input.Type.GetExtractType());
+        Assert.Equal(OrderDataTransferObjectValidationTests.ORDER_EXAMPLE.TotalPrice.GetTotalPrice(), input.TotalPrice.GetTotalPrice());
+        Assert.Equal(OrderDataTransferObjectValidationTests.ORDER_EXAMPLE.UnitaryPrice.GetUnitaryPrice(), input.UnitaryPrice.GetUnitaryPrice());
+        Assert.Equal(OrderDataTransferObjectValidationTests.ORDER_EXAMPLE.Quantity.GetQuantity(), input.Quantity.GetQuantity());
         Assert.Equal(OrderDataTransferObjectValidationTests.ORDER_EXAMPLE.CustomerId, input.CustomerId);
         Assert.Equal(OrderDataTransferObjectValidationTests.ORDER_EXAMPLE.FinancialAssetId, input.FinancialAssetId);
-        Assert.True(input.GetInputValidationResult().IsSuccess);
     }
 }

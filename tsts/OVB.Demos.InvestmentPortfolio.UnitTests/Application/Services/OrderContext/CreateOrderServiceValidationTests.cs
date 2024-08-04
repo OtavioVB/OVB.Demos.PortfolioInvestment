@@ -5,8 +5,10 @@ using OVB.Demos.InvestmentPortfolio.Domain.Utils.NotificationContext.Interfaces;
 using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 using OVB.Demos.InvestmentPortfolio.UnitTests.Application.Services.FinancialAssetContext.Fakes;
 using OVB.Demos.InvestmentPortfolio.UnitTests.Application.Services.OrderContext.Fakes;
+using OVB.Demos.InvestmentPortfolio.UnitTests.Domain.CustomerContext;
 using OVB.Demos.InvestmentPortfolio.UnitTests.Domain.FinancialAssetContext;
 using OVB.Demos.InvestmentPortfolio.UnitTests.Domain.OrderContext;
+using System.Text.Json;
 
 namespace OVB.Demos.InvestmentPortfolio.UnitTests.Application.Services.OrderContext;
 
@@ -139,19 +141,21 @@ public sealed class CreateOrderServiceValidationTests
             extensionFinancialAssetRepository: repositoryFinancialAsset,
             unitOfWork: new FakerUnitOfWork());
 
-        var customerId = OrderDataTransferObjectValidationTests.ORDER_EXAMPLE.CustomerId;
-        OrderTypeValueObject orderType = ORDER_TYPE;
-        QuantityValueObject quantity = 0;
+        var customerId = CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE.Id;
+        OrderTypeValueObject orderType = OrderTypeValueObject.Factory(ORDER_TYPE);
+        QuantityValueObject quantity = QuantityValueObject.Factory(0);
 
         var expectedMethodResult = MethodResult<INotification>.Factory(customerId, orderType, quantity);
 
+        var input = CreateOrderServiceInput.Factory(
+                customerId: customerId,
+                type: orderType,
+                quantity: quantity,
+                financialAsset: FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE);
+
         // Act
         var serviceResult = await orderService.CreateOrderServiceAsync(
-            input: CreateOrderServiceInput.Factory(
-                customerId: OrderDataTransferObjectValidationTests.ORDER_EXAMPLE.CustomerId,
-                type: ORDER_TYPE,
-                quantity: quantity,
-                financialAsset: FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE),
+            input: input,
             cancellationToken: CancellationToken.None);
 
         // Assert
