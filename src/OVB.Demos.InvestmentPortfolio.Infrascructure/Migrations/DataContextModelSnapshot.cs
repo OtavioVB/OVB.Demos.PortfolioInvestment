@@ -119,12 +119,12 @@ namespace OVB.Demos.InvestmentPortfolio.Infrascructure.Migrations
                         .IsFixedLength();
 
                     b.Property<decimal>("Quantity")
-                        .HasColumnType("DECIMAL(10, 5)")
+                        .HasColumnType("DECIMAL(25, 7)")
                         .HasColumnName("quantity")
                         .IsFixedLength(false);
 
                     b.Property<decimal>("TotalPrice")
-                        .HasColumnType("DECIMAL(10, 5)")
+                        .HasColumnType("DECIMAL(25, 7)")
                         .HasColumnName("total_price")
                         .IsFixedLength(false);
 
@@ -136,7 +136,7 @@ namespace OVB.Demos.InvestmentPortfolio.Infrascructure.Migrations
                         .IsFixedLength(false);
 
                     b.Property<decimal>("UnitaryPrice")
-                        .HasColumnType("DECIMAL(10, 5)")
+                        .HasColumnType("DECIMAL(25, 7)")
                         .HasColumnName("unitary_price")
                         .IsFixedLength(false);
 
@@ -181,7 +181,7 @@ namespace OVB.Demos.InvestmentPortfolio.Infrascructure.Migrations
                         .IsFixedLength(false);
 
                     b.Property<decimal>("InterestRate")
-                        .HasColumnType("DECIMAL(10, 5)")
+                        .HasColumnType("DECIMAL(25, 7)")
                         .HasColumnName("interest_rate")
                         .IsFixedLength(false);
 
@@ -193,7 +193,7 @@ namespace OVB.Demos.InvestmentPortfolio.Infrascructure.Migrations
                         .IsFixedLength();
 
                     b.Property<decimal>("QuantityAvailable")
-                        .HasColumnType("DECIMAL(10, 5)")
+                        .HasColumnType("DECIMAL(25, 7)")
                         .HasColumnName("quantity_available")
                         .IsFixedLength(false);
 
@@ -219,7 +219,7 @@ namespace OVB.Demos.InvestmentPortfolio.Infrascructure.Migrations
                         .IsFixedLength(false);
 
                     b.Property<decimal>("UnitaryPrice")
-                        .HasColumnType("DECIMAL(10, 5)")
+                        .HasColumnType("DECIMAL(25, 7)")
                         .HasColumnName("unitary_price")
                         .IsFixedLength(false);
 
@@ -327,7 +327,7 @@ namespace OVB.Demos.InvestmentPortfolio.Infrascructure.Migrations
                         .IsFixedLength();
 
                     b.Property<decimal>("Quantity")
-                        .HasColumnType("DECIMAL(10, 5)")
+                        .HasColumnType("DECIMAL(25, 7)")
                         .HasColumnName("quantity")
                         .IsFixedLength(false);
 
@@ -339,7 +339,7 @@ namespace OVB.Demos.InvestmentPortfolio.Infrascructure.Migrations
                         .IsFixedLength(false);
 
                     b.Property<decimal>("TotalPrice")
-                        .HasColumnType("DECIMAL(10, 5)")
+                        .HasColumnType("DECIMAL(25, 7)")
                         .HasColumnName("total_price")
                         .IsFixedLength(false);
 
@@ -351,7 +351,7 @@ namespace OVB.Demos.InvestmentPortfolio.Infrascructure.Migrations
                         .IsFixedLength(false);
 
                     b.Property<decimal>("UnitaryPrice")
-                        .HasColumnType("DECIMAL(10, 5)")
+                        .HasColumnType("DECIMAL(25, 7)")
                         .HasColumnName("unitary_price")
                         .IsFixedLength(false);
 
@@ -392,12 +392,12 @@ namespace OVB.Demos.InvestmentPortfolio.Infrascructure.Migrations
                         .IsFixedLength();
 
                     b.Property<decimal>("Quantity")
-                        .HasColumnType("DECIMAL(10, 5)")
+                        .HasColumnType("DECIMAL(25, 7)")
                         .HasColumnName("quantity")
                         .IsFixedLength(false);
 
                     b.Property<decimal>("TotalPrice")
-                        .HasColumnType("DECIMAL(10, 5)")
+                        .HasColumnType("DECIMAL(25, 7)")
                         .HasColumnName("total_price")
                         .IsFixedLength(false);
 

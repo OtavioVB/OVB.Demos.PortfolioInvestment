@@ -13,4 +13,10 @@ public interface IExtensionPortfolioRepository
         IdentityValueObject financialAssetId, 
         IdentityValueObject customerId,
         CancellationToken cancellationToken);
+
+    public Task<Portfolio[]> QueryPortfoliosByCustomerIdAndPaginationIncludingFinancialAssetAsNoTrackingAsync(
+        IdentityValueObject customerId,
+        PageValueObject page,
+        OffsetValueObject offset,
+        CancellationToken cancellationToken);
 }

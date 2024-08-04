@@ -70,4 +70,32 @@ public sealed class PortfolioService : IPortfolioService
                 code: PORTFOLIO_UPDATE_HAS_DONE_NOTIFICATION_CODE,
                 message: PORTFOLIO_UPDATE_HAS_DONE_NOTIFICATION_MESSAGE)]);
     }
+
+    public async Task<MethodResult<INotification, QueryPortfolioServiceOutput>> QueryPortfolioServiceAsync(
+        QueryPortfolioServiceInput input, CancellationToken cancellationToken)
+    {
+        var inputValidationResult = input.GetInputValidationResult();
+
+        if (inputValidationResult.IsError)
+            return MethodResult<INotification, QueryPortfolioServiceOutput>.FactoryError(
+                notifications: inputValidationResult.Notifications);
+
+        var portfolios = await _extensionPortfolioRepository.QueryPortfoliosByCustomerIdAndPaginationIncludingFinancialAssetAsNoTrackingAsync(
+            customerId: input.CustomerId,
+            page: input.Page,
+            offset: input.Offset,
+            cancellationToken: cancellationToken);
+
+        const string QUERY_PORTFOLIOS_HAS_DONE_SUCCESSFULL_NOTIFICATION_CODE = "QUERY_PORTFOLIOS_HAS_DONE_SUCCESSFULL";
+        const string QUERY_PORTFOLIOS_HAS_DONE_SUCCESSFULL_NOTIFICATION_MESSAGE = "A consulta dos portfólios foi realizada com sucesso.";
+
+        return MethodResult<INotification, QueryPortfolioServiceOutput>.FactorySuccess(
+            notifications: [Notification.FactorySuccess(
+                code: QUERY_PORTFOLIOS_HAS_DONE_SUCCESSFULL_NOTIFICATION_CODE,
+                message: QUERY_PORTFOLIOS_HAS_DONE_SUCCESSFULL_NOTIFICATION_MESSAGE)],
+            output: QueryPortfolioServiceOutput.Factory(
+                page: input.Page,
+                offset: input.Offset,
+                items: portfolios));
+    }
 }

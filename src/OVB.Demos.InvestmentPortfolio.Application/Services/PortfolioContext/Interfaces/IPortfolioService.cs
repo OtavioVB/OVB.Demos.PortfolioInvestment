@@ -10,4 +10,8 @@ public interface IPortfolioService
     public Task<MethodResult<INotification>> CreateOrUpdatePortfolioServiceAsync(
         CreateOrUpdatePortfolioServiceInput input,
         CancellationToken cancellationToken);
+
+    public Task<MethodResult<INotification, QueryPortfolioServiceOutput>> QueryPortfolioServiceAsync(
+        QueryPortfolioServiceInput input,
+        CancellationToken cancellationToken);
 }

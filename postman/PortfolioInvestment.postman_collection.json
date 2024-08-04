@@ -58,12 +58,44 @@
 			"name": "ATIVOS FINANCEIROS",
 			"item": [
 				{
+					"name": "AVISOS",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Administrator-Key",
+										"value": "{{administratorKey}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{baseUri}}/api/v1/financial-assets/advices",
+									"protocol": "https",
+									"host": [
+										"{{baseUri}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"financial-assets",
+										"advices"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Consultar Ativos Financeiros",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{baseUri}}/api/v1/financial-assets",
+							"raw": "https://{{baseUri}}/api/v1/financial-assets?page=1&size=25",
 							"protocol": "https",
 							"host": [
 								"{{baseUri}}"
@@ -72,6 +104,16 @@
 								"api",
 								"v1",
 								"financial-assets"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "25"
+								}
 							]
 						}
 					},
@@ -143,6 +185,218 @@
 								"v1",
 								"financial-assets",
 								"{{financialAssetId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ORDENS",
+			"item": [
+				{
+					"name": "Criar Ordem de Compra",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{customerAccessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUri}}/api/v1/financial-assets/{{financialAssetId}}/orders/BUY",
+							"protocol": "https",
+							"host": [
+								"{{baseUri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"financial-assets",
+								"{{financialAssetId}}",
+								"orders",
+								"BUY"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Ordem de Venda",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{customerAccessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUri}}/api/v1/financial-assets/{{financialAssetId}}/orders/SELL",
+							"protocol": "https",
+							"host": [
+								"{{baseUri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"financial-assets",
+								"{{financialAssetId}}",
+								"orders",
+								"SELL"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EXTRATO DE ATIVO FINANCEIROS",
+			"item": [
+				{
+					"name": "Consultar Extrato de Ativos Financeiros",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{customerAccessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{baseUri}}/api/v1/financial-assets/extracts?page=1&size=25",
+							"protocol": "https",
+							"host": [
+								"{{baseUri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"financial-assets",
+								"extracts"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CLIENTES",
+			"item": [
+				{
+					"name": "OAuth 2.0 Autenticação",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "otaviovb.developer@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "_836hjfk7DH8!",
+									"type": "text"
+								},
+								{
+									"key": "grantType",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{baseUri}}/api/v1/customers/oauth/token",
+							"protocol": "https",
+							"host": [
+								"{{baseUri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PORTFOLIO FINANCEIRO",
+			"item": [
+				{
+					"name": "Consultar Portfólios Financeiro",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{customerAccessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{baseUri}}/api/v1/financial-assets/portfolios?page=1&size=25",
+							"protocol": "https",
+							"host": [
+								"{{baseUri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"financial-assets",
+								"portfolios"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "25"
+								}
 							]
 						}
 					},

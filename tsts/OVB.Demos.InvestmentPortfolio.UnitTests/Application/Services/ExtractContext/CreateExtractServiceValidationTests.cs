@@ -15,7 +15,8 @@ public sealed class CreateExtractServiceValidationTests
 
         var service = new ExtractService(
             extractBaseRepository: repository,
-            unitOfWork: new FakerUnitOfWork());
+            unitOfWork: new FakerUnitOfWork(),
+            extensionExtractRepository: repository);
 
         const string EXPECTED_NOTIFICATION_CODE = "CREATE_EXTRACT_HAS_DONE";
         const string EXPECTED_NOTIFICATION_MESSAGE = "A criação do item extratual foi realizada com sucesso.";

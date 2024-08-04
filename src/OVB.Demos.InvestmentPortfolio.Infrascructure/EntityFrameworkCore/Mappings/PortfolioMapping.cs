@@ -78,14 +78,14 @@ public sealed class PortfolioMapping : IEntityTypeConfiguration<Portfolio>
         builder.Property(p => p.TotalPrice)
             .IsRequired(true)
             .IsFixedLength(false)
-            .HasColumnType("DECIMAL(10, 5)")
+            .HasColumnType("DECIMAL(25, 7)")
             .HasColumnName("total_price")
             .HasConversion(p => p.GetTotalPrice(), p => TotalPriceValueObject.Factory(p))
             .ValueGeneratedNever();
         builder.Property(p => p.Quantity)
             .IsRequired(true)
             .IsFixedLength(false)
-            .HasColumnType("DECIMAL(10, 5)")
+            .HasColumnType("DECIMAL(25, 7)")
             .HasColumnName("quantity")
             .HasConversion(p => p.GetQuantity(), p => QuantityValueObject.Factory(p))
             .ValueGeneratedNever();

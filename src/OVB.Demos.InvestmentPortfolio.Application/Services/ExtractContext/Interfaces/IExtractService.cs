@@ -10,4 +10,8 @@ public interface IExtractService
     public Task<MethodResult<INotification, CreateExtractServiceOutput>> CreateExtractServiceAsync(
         CreateExtractServiceInput input,
         CancellationToken cancellationToken);
+
+    public Task<MethodResult<INotification, QueryExtractServiceOutput>> QueryExtractServiceAsync(
+        QueryExtractServiceInput input,
+        CancellationToken cancellationToken);
 }

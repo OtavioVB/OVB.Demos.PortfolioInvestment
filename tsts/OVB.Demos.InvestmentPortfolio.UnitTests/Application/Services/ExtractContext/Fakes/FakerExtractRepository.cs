@@ -1,10 +1,15 @@
 ﻿using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.ExtractContext.DataTransferObject;
+using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Base.Interfaces;
+using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Extensions;
+using OVB.Demos.InvestmentPortfolio.UnitTests.Domain.ExtractContext;
 
 namespace OVB.Demos.InvestmentPortfolio.UnitTests.Application.Services.ExtractContext.Fakes;
 
-public sealed class FakerExtractRepository : IBaseRepository<Extract>
+public sealed class FakerExtractRepository : IBaseRepository<Extract>, IExtensionExtractRepository
 {
+
+
     public Task AddAsync(Extract entity, CancellationToken cancellationToken)
         => Task.CompletedTask;
 
@@ -17,6 +22,9 @@ public sealed class FakerExtractRepository : IBaseRepository<Extract>
     {
         throw new NotImplementedException();
     }
+
+    public Task<Extract[]> QueryExtractByCustomerIdAsNoTrackingIncludingFinanceAssetAsync(IdentityValueObject customerId, PageValueObject page, OffsetValueObject offset, CancellationToken cancellationToken)
+        => Task.FromResult((Extract[])[ExtractDataTransferObjectValidationTests.EXTRACT_EXAMPLE]);
 
     public Task RemoveAsync(Extract entity, CancellationToken cancellationToken)
     {

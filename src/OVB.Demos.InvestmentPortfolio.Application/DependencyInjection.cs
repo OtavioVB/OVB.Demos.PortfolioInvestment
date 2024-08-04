@@ -63,7 +63,8 @@ public static class DependencyInjection
         serviceCollection.AddScoped<IExtractService, ExtractService>((serviceProvider) 
             => new ExtractService(
                 extractBaseRepository: serviceProvider.GetRequiredService<IBaseRepository<Extract>>(),
-                unitOfWork: serviceProvider.GetRequiredService<IUnitOfWork>()));
+                unitOfWork: serviceProvider.GetRequiredService<IUnitOfWork>(),
+                extensionExtractRepository: serviceProvider.GetRequiredService<IExtensionExtractRepository>()));
 
         serviceCollection.AddScoped<IOrderService, OrderService>((serviceProvider)
             => new OrderService(

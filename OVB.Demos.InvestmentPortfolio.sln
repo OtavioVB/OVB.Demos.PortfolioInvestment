@@ -33,7 +33,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchs", "benchs", "{FC9C3D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "functions", "functions", "{EC755372-C73C-4212-8897-036E53C0D1E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVB.Demos.InvestmentPortfolio.Scheduler", "functions\OVB.Demos.InvestmentPortfolio.Scheduler\OVB.Demos.InvestmentPortfolio.Scheduler.csproj", "{9584C2CA-3835-40DB-B963-5B93CFE6B068}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OVB.Demos.InvestmentPortfolio.Scheduler", "functions\OVB.Demos.InvestmentPortfolio.Scheduler\OVB.Demos.InvestmentPortfolio.Scheduler.csproj", "{9584C2CA-3835-40DB-B963-5B93CFE6B068}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stress", "stress", "{0B48F93A-C9C9-4904-932B-3D7702F6C3B9}"
+	ProjectSection(SolutionItems) = preProject
+		tsts\stress\oauth_customer_authentication_stress_test.js = tsts\stress\oauth_customer_authentication_stress_test.js
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +81,7 @@ Global
 		{6349A0D8-2F36-453C-83D5-09DD43EE1B85} = {525A9677-EE29-4325-9B8B-2B764D1B46C6}
 		{9FACF622-85F0-4DB2-AEBB-3BCF84D9CBC7} = {B1B446FF-7CAA-43A5-8A72-00C2C47B9B62}
 		{9584C2CA-3835-40DB-B963-5B93CFE6B068} = {EC755372-C73C-4212-8897-036E53C0D1E2}
+		{0B48F93A-C9C9-4904-932B-3D7702F6C3B9} = {B1B446FF-7CAA-43A5-8A72-00C2C47B9B62}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5238D0B8-446F-40B4-9A3E-5F87EA05C7CC}

@@ -7,6 +7,7 @@ using OVB.Demos.InvestmentPortfolio.Domain.Utils.NotificationContext;
 using OVB.Demos.InvestmentPortfolio.Domain.Utils.NotificationContext.Interfaces;
 using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Base.Interfaces;
+using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Extensions;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.UnitOfWork.Interfaces;
 
 namespace OVB.Demos.InvestmentPortfolio.Application.Services.ExtractContext;
@@ -15,13 +16,16 @@ public sealed class ExtractService : IExtractService
 {
     private readonly IBaseRepository<Extract> _extractBaseRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IExtensionExtractRepository _extensionExtractRepository;
 
     public ExtractService(
         IBaseRepository<Extract> extractBaseRepository,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        IExtensionExtractRepository extensionExtractRepository)
     {
         _extractBaseRepository = extractBaseRepository;
         _unitOfWork = unitOfWork;
+        _extensionExtractRepository = extensionExtractRepository;
     }
 
     public async Task<MethodResult<INotification, CreateExtractServiceOutput>> CreateExtractServiceAsync(
@@ -57,5 +61,33 @@ public sealed class ExtractService : IExtractService
                 message: CREATE_EXTRACT_HAS_DONE_NOTIFICATION_MESSAGE)],
             output: CreateExtractServiceOutput.Factory(
                 extract: extract));
+    }
+
+    public async Task<MethodResult<INotification, QueryExtractServiceOutput>> QueryExtractServiceAsync(
+        QueryExtractServiceInput input, CancellationToken cancellationToken)
+    {
+        var inputValidationResult = input.GetInputValidationResult();
+
+        if (inputValidationResult.IsError)
+            return MethodResult<INotification, QueryExtractServiceOutput>.FactoryError(
+                notifications: inputValidationResult.Notifications);
+
+        var extracts = await _extensionExtractRepository.QueryExtractByCustomerIdAsNoTrackingIncludingFinanceAssetAsync(
+            customerId: input.CustomerId,
+            page: input.Page,
+            offset: input.Offset,
+            cancellationToken: cancellationToken);
+
+        const string QUERY_CUSTOMER_EXTRACTS_HAS_DONE_SUCCESS_NOTIFICATION_CODE = "QUERY_CUSTOMER_EXTRACTS_HAS_DONE_SUCCESS";
+        const string QUERY_CUSTOMER_EXTRACTS_HAS_DONE_NOTIFICATION_MESSAGE = "O extrato dos ativos financeiros foi consultado com sucesso.";
+
+        return MethodResult<INotification, QueryExtractServiceOutput>.FactorySuccess(
+            notifications: [Notification.FactorySuccess(
+                code: QUERY_CUSTOMER_EXTRACTS_HAS_DONE_SUCCESS_NOTIFICATION_CODE,
+                message: QUERY_CUSTOMER_EXTRACTS_HAS_DONE_NOTIFICATION_MESSAGE)],
+            output: QueryExtractServiceOutput.Factory(
+                page: input.Page,
+                offset: input.Offset,
+                items: extracts));
     }
 }
