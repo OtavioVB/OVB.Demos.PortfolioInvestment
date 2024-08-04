@@ -54,4 +54,13 @@ public readonly struct QuantityAvailableValueObject
         => Factory(obj);
     public static implicit operator MethodResult<INotification>(QuantityAvailableValueObject obj)
         => obj.MethodResult;
+
+    public static QuantityAvailableValueObject operator +(QuantityAvailableValueObject a, QuantityAvailableValueObject b)
+        => a.GetQuantityAvailable() + b.GetQuantityAvailable();
+    public static QuantityAvailableValueObject operator +(QuantityAvailableValueObject a, decimal b)
+        => a.GetQuantityAvailable() + b;
+    public static QuantityAvailableValueObject operator -(QuantityAvailableValueObject a, QuantityAvailableValueObject b)
+        => a.GetQuantityAvailable() - a.GetQuantityAvailable();
+    public static QuantityAvailableValueObject operator -(QuantityAvailableValueObject a, decimal b)
+        => a.GetQuantityAvailable() - b;
 }

@@ -11,11 +11,13 @@ public sealed class FakerExtensionFinancialAssetRepository : IBaseRepository<Fin
 {
     public readonly bool _existsSymbol;
     public readonly bool _existsFinancialAssetOnGet;
+    public readonly bool _financialAssetQuantityBuyIsGreaterThanTheAllowed;
 
-    public FakerExtensionFinancialAssetRepository(bool existsSymbol, bool existsFinancialAssetOnGet = true)
+    public FakerExtensionFinancialAssetRepository(bool existsSymbol, bool existsFinancialAssetOnGet = true, bool financialAssetQuantityBuyIsGreaterThanTheAllowed = true)
     {
         _existsSymbol = existsSymbol;
         _existsFinancialAssetOnGet = existsFinancialAssetOnGet;
+        _financialAssetQuantityBuyIsGreaterThanTheAllowed = financialAssetQuantityBuyIsGreaterThanTheAllowed;
     }
 
     public Task AddAsync(FinancialAsset entity, CancellationToken cancellationToken)
@@ -48,6 +50,13 @@ public sealed class FakerExtensionFinancialAssetRepository : IBaseRepository<Fin
     }
 
     public Task UpdateAsync(FinancialAsset entity, CancellationToken cancellationToken)
+        => Task.CompletedTask;
+
+    public Task<int> UpdateFinancialAssetIfBuyProcessQuantityIsGreaterThanTheMinimumAsync(IdentityValueObject financialAssetId, decimal quantityWillBuy, CancellationToken cancellationToken)
+        => _financialAssetQuantityBuyIsGreaterThanTheAllowed == true ? Task.FromResult(1) : Task.FromResult(0);
+
+
+    public Task UpdateFinancialAssetWithOrderSellProcessAync(IdentityValueObject financialAssetId, decimal quantityWillSell, CancellationToken cancellationToken)
         => Task.CompletedTask;
 
     public Task UpdateRangeAsync(FinancialAsset[] entities, CancellationToken cancellationToken)

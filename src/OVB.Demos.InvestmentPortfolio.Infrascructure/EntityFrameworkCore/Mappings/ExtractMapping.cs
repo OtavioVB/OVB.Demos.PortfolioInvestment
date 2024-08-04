@@ -110,7 +110,7 @@ public sealed class ExtractMapping : IEntityTypeConfiguration<Extract>
             .IsFixedLength(false)
             .HasColumnType("DECIMAL(10, 5)")
             .HasColumnName("quantity")
-            .HasConversion(p => p.GetQuantityAvailable(), p => QuantityAvailableValueObject.Factory(p))
+            .HasConversion(p => p.GetQuantity(), p => QuantityValueObject.Factory(p))
             .ValueGeneratedNever();
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.PortfolioContext.DataTransferObject;
+using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Base;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Extensions;
 
@@ -13,4 +14,16 @@ public sealed class PortfolioRepository : BaseRepository<Portfolio>, IExtensionP
 
     public override Task<Portfolio?> GetEntityByIdAsync(Guid id, CancellationToken cancellationToken)
         => _dataContext.Set<Portfolio>().Where(p => p.Id.GetIdentity() == id).FirstOrDefaultAsync(cancellationToken);
+
+    public Task<Portfolio?> QueryPortfolioByFinancialAssetIdAndCustomerIdAsNoTrackingAsync(
+        IdentityValueObject financialAssetId, IdentityValueObject customerId, CancellationToken cancellationToken)
+        => _dataContext.Set<Portfolio>().Where(p => p.FinancialAssetId == financialAssetId && p.CustomerId == customerId).FirstOrDefaultAsync(cancellationToken);
+
+    public Task<int> UpdatePortfolioQuantityAndTotalPriceInvestedAsync(
+        IdentityValueObject financialAssetId, IdentityValueObject customerId,
+        QuantityValueObject additionalQuantity, TotalPriceValueObject additionalPrice,
+        CancellationToken cancellationToken)
+        => _dataContext.Database.ExecuteSqlAsync(
+            sql: $"UPDATE portfolio.portfolios SET total_price = total_price + {additionalPrice.GetTotalPrice()}, quantity = quantity + {additionalQuantity.GetQuantity()} WHERE financial_asset_id = {financialAssetId.GetIdentityAsString()} AND customer_id = {customerId.GetIdentityAsString()}",
+            cancellationToken: cancellationToken);
 }

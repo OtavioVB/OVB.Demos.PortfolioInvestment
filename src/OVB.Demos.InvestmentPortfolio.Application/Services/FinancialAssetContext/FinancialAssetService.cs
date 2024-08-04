@@ -176,6 +176,37 @@ public sealed class FinancialAssetService : IFinancialAssetService
                 message: FINANCIAL_ASSET_SUCCESS_NOTIFICATION_MESSAGE)]);
     }
 
+    public async Task<MethodResult<INotification, QueryByIdFinancialAssetServiceOutput>> QueryByIdFinancialAssetServiceAsync(
+        QueryByIdFinancialAssetServiceInput input,
+        CancellationToken cancellationToken)
+    {
+        var inputValidationResult = input.GetValidationResult();
+
+        if (inputValidationResult.IsError)
+            return MethodResult<INotification, QueryByIdFinancialAssetServiceOutput>.FactoryError(
+                notifications: inputValidationResult.Notifications);
+
+        var queryFinancialAssetByIdResult = await _baseFinancialAssetRepository.GetEntityByIdAsync(
+            id: input.FinancialAssetId,
+            cancellationToken: cancellationToken);
+
+        var financialAssetNotFoundValidationResult = ValidateFinancialAssetNotFoundOnDatabase(queryFinancialAssetByIdResult);
+
+        if (financialAssetNotFoundValidationResult.IsError)
+            return MethodResult<INotification, QueryByIdFinancialAssetServiceOutput>.FactoryError(
+                notifications: financialAssetNotFoundValidationResult.Notifications);
+
+        const string QUERY_BY_ID_FINANCIAL_ASSET_HAS_DONE_NOTIFICATION_CODE = "QUERY_BY_ID_FINANCIAL_ASSET_HAS_DONE";
+        const string QUERY_BY_ID_FINANCIAL_ASSET_HAS_DONE_NOTIFICATION_MESSAGE = "A consulta do ativo financeiro pela sua identificação foi realizada com sucesso.";
+
+        return MethodResult<INotification, QueryByIdFinancialAssetServiceOutput>.FactorySuccess(
+            notifications: [Notification.FactorySuccess(
+                code: QUERY_BY_ID_FINANCIAL_ASSET_HAS_DONE_NOTIFICATION_CODE,
+                message: QUERY_BY_ID_FINANCIAL_ASSET_HAS_DONE_NOTIFICATION_MESSAGE)],
+            output: QueryByIdFinancialAssetServiceOutput.Factory(
+                financialAsset: queryFinancialAssetByIdResult!));
+    }
+
     public async Task<MethodResult<INotification, QueryFinancialAssetServiceOutput>> QueryFinancialAssetServiceAsync(
         QueryFinancialAssetServiceInput input, 
         CancellationToken cancellationToken)

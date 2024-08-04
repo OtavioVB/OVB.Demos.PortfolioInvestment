@@ -22,4 +22,8 @@ public interface IFinancialAssetService
 
     public Task<MethodResult<INotification>> AdviceFinancialAssetUpcomingExpirationDateAsync(
         CancellationToken cancellationToken);
+
+    public Task<MethodResult<INotification, QueryByIdFinancialAssetServiceOutput>> QueryByIdFinancialAssetServiceAsync(
+        QueryByIdFinancialAssetServiceInput input,
+        CancellationToken cancellationToken);
 }

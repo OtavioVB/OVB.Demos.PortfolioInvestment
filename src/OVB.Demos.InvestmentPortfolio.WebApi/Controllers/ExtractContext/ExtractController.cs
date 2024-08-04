@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace OVB.Demos.InvestmentPortfolio.WebApi.Controllers;
+namespace OVB.Demos.InvestmentPortfolio.WebApi.Controllers.ExtractContext;
 
 [Route("api/v1/extracts")]
 [ApiController]

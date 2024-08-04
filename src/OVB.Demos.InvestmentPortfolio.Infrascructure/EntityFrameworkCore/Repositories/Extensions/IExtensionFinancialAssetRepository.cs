@@ -8,4 +8,6 @@ public interface IExtensionFinancialAssetRepository
     public Task<bool> VerifyFinancialAssetExistsBySymbolAsync(AssetSymbolValueObject symbol, CancellationToken cancellationToken);
     public Task<FinancialAsset[]> QueryFinancialAssetAsNoTrackingByPaginationAsync(PageValueObject page, OffsetValueObject offset, CancellationToken cancellationToken);
     public Task<FinancialAsset[]> QueryFinancialAssetAsNoTrackingWhenExpirationDateIsLessThanExpectedDateIncludingOperatorsAsync(DateTime expirationDateExpected, CancellationToken cancellationToken);
+    public Task UpdateFinancialAssetWithOrderSellProcessAync(IdentityValueObject financialAssetId, decimal quantityWillSell, CancellationToken cancellationToken);
+    public Task<int> UpdateFinancialAssetIfBuyProcessQuantityIsGreaterThanTheMinimumAsync(IdentityValueObject financialAssetId, decimal quantityWillBuy, CancellationToken cancellationToken);
 }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 
-namespace OVB.Demos.InvestmentPortfolio.WebApi.Controllers;
+namespace OVB.Demos.InvestmentPortfolio.WebApi.Controllers.PortfolioContext;
 
 [Route("api/v1/portfolios")]
 [ApiController]

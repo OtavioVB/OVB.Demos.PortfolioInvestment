@@ -12,9 +12,9 @@ public sealed record Extract
     public ExtractTypeValueObject Type { get; set; }
     public TotalPriceValueObject TotalPrice { get; set; }
     public UnitaryPriceValueObject UnitaryPrice { get; set; }
-    public QuantityAvailableValueObject Quantity { get; set; }
+    public QuantityValueObject Quantity { get; set; }
 
-    public Extract(IdentityValueObject id, DateTime createdAt, ExtractTypeValueObject type, TotalPriceValueObject totalPrice, UnitaryPriceValueObject unitaryPrice, QuantityAvailableValueObject quantity)
+    public Extract(IdentityValueObject id, DateTime createdAt, ExtractTypeValueObject type, TotalPriceValueObject totalPrice, UnitaryPriceValueObject unitaryPrice, QuantityValueObject quantity)
     {
         Id = id;
         CreatedAt = createdAt;
