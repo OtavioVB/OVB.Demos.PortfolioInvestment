@@ -96,6 +96,19 @@ Ou, utilizar a documentação disponibilizada no swagger através do endpoint:
 https://localhost:5000/swagger/index.html
 ```
 
+Além disso, o serviço de gerenciamento do Postgres (PgAdmin) está up no endpoint `http://localhost:17000` para gerenciamento do banco de dados. Você pode usar o email `suporte@postgres.com.br` e a senha `postgres@123` para ter acesso ao banco de dados.
+
+Como não há endpoint para cadastro de cliente e cadastro de operadores, utilize as queries a seguir para fazer o cadastro:
+
+```sql
+INSERT INTO operator.operators(
+	idoperator, code, name, email, password_hash, password_salt, document)
+	VALUES ('d96a228c-96fb-477e-bed4-1d28575f088e','OPER0KHF75','Otávio Carmanini','otaviovb.developer@gmail.com','8b440d3cfef73bda67eb80626dcb359b0ddd1cd319656c3eadc5bd452414d676','82J2347KHA4K','54627477805');
+INSERT INTO customer.customers(
+	idcustomer, code, name, document, email, created_at, password_hash, password_salt)
+	VALUES ('ed1d721d-62ba-44ef-b887-0c0b812ed37d','CST94KDJNX3','Otávio Carmanini','54627477805','otaviovb.developer@gmail.com','2024-08-04 16:29:45+00','8b440d3cfef73bda67eb80626dcb359b0ddd1cd319656c3eadc5bd452414d676','82J2347KHA4K');
+```
+
 ### Relatório de Teste de Carga
 
 Você consegue obter informações de um pequeno e mínimo teste de carga realizado, através do arquivo em .xlsx disponibilizado com nome `RESULTADOS_TESTES_DE_CARGA.xlsx`.
