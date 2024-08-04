@@ -101,46 +101,8 @@ public readonly struct MethodResult<TNotification, TOutput>
         TOutput? output = default,
         params MethodResult<TNotification>[] processResults)
     {
+        var methodResult = MethodResult<TNotification>.Factory(processResults);
 
-        var totalNotifications = 0;
-        var totalExceptions = 0;
-
-        for (int i = 0; i < processResults.Length; i++)
-        {
-            totalNotifications += processResults[i].Notifications?.Length ?? 0;
-            totalExceptions += processResults[i].Notifications?.Length ?? 0;
-        }
-
-        MethodResultType? newTypeProcessResult = null;
-
-        TNotification[]? newMessageArray = null;
-        newMessageArray = new TNotification[totalNotifications];
-
-        var lastMessageIndex = 0;
-
-        for (int i = 0; i < processResults.Length; i++)
-        {
-            var processResult = processResults[i];
-
-            if (newTypeProcessResult is null)
-                newTypeProcessResult = processResult.Type;
-            else if (newTypeProcessResult == MethodResultType.Success && processResult.Type != MethodResultType.Success)
-                newTypeProcessResult = processResult.Type;
-
-            if (processResult.Notifications is not null)
-            {
-                Array.Copy(
-                    sourceArray: processResult.Notifications,
-                    sourceIndex: 0,
-                    destinationArray: newMessageArray!,
-                    destinationIndex: lastMessageIndex,
-                    length: processResult.Notifications.Length
-                );
-
-                lastMessageIndex += processResult.Notifications.Length;
-            }
-        }
-
-        return new MethodResult<TNotification, TOutput>(newTypeProcessResult!.Value, newMessageArray, output);
+        return new MethodResult<TNotification, TOutput>(methodResult.Type, methodResult.Notifications, output);
     }
 }
