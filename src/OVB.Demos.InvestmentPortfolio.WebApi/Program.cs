@@ -13,20 +13,6 @@ public static class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        const string POLICY = "Policy";
-
-        builder.Services.AddCors(p =>
-        {
-            p.AddPolicy(
-                name: POLICY,
-                q =>
-                {
-                    q.AllowAnyHeader();
-                    q.AllowAnyMethod();
-                    q.AllowAnyOrigin();
-                });
-        });
-
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
@@ -61,7 +47,6 @@ public static class Program
         });
 
         var app = builder.Build();
-        app.UseCors(POLICY);
         app.UseSwagger();
         app.UseSwaggerUI();
         app.UseAuthentication();

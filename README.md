@@ -1,8 +1,9 @@
 ﻿# OVB.Demos.InvestmentPortfolio
 
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+
 Esse é o repositório do teste técnico de desenvolvimento de um Sistema de Gestão de Portfólio de Investimentos. 
 
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=bugs)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
