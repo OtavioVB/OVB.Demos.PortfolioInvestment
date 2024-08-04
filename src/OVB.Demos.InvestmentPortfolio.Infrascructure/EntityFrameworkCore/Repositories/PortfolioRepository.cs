@@ -19,6 +19,9 @@ public sealed class PortfolioRepository : BaseRepository<Portfolio>, IExtensionP
         IdentityValueObject financialAssetId, IdentityValueObject customerId, CancellationToken cancellationToken)
         => _dataContext.Set<Portfolio>().Where(p => p.FinancialAssetId == financialAssetId && p.CustomerId == customerId).FirstOrDefaultAsync(cancellationToken);
 
+    public Task<Portfolio[]> QueryPortfoliosByCustomerIdAndPaginationIncludingFinancialAssetAsNoTrackingAsync(IdentityValueObject customerId, PageValueObject page, OffsetValueObject offset, CancellationToken cancellationToken)
+        => _dataContext.Set<Portfolio>().AsNoTracking().Include(p => p.FinancialAsset).Where(p => p.CustomerId == customerId).Skip(page.GetIndex() * offset.GetOffset()).Take(offset.GetOffset()).ToArrayAsync(cancellationToken);
+
     public Task<int> UpdatePortfolioQuantityAndTotalPriceInvestedAsync(
         IdentityValueObject financialAssetId, IdentityValueObject customerId,
         QuantityValueObject additionalQuantity, TotalPriceValueObject additionalPrice,

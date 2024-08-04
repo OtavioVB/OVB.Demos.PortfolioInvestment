@@ -1,5 +1,20 @@
 ﻿# OVB.Demos.InvestmentPortfolio
 
+Esse é o repositório do teste técnico de desenvolvimento de um Sistema de Gestão de Portfólio de Investimentos. 
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=bugs)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=coverage)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=OtavioVB_OVB.Demos.PortfolioInvestment&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=OtavioVB_OVB.Demos.PortfolioInvestment)
+
 ### :chains: Dependências
 
 As dependências do projeto está listado a seguir:
@@ -8,6 +23,9 @@ As dependências do projeto está listado a seguir:
 - [.NET 8](https://dotnet.microsoft.com/pt-br/download/dotnet/8.0);
 - [Entity Framework Core 8](https://learn.microsoft.com/pt-br/ef/core/get-started/overview/install);
 - [Docker e Docker-Compose](https://docs.docker.com/);
+- [Azure Functions e Azurite](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=python-v2%2Cisolated-process%2Cnodejs-v4&pivots=programming-language-csharp)
+- [k6](https://k6.io/docs)
+- [SonarCloud](https://sonarcloud.io/summary/overall?id=OtavioVB_OVB.Demos.PortfolioInvestment)
 
 ### :gear: Como executar a aplicação?
 
@@ -48,6 +66,20 @@ dotnet ef database update --project "src/OVB.Demos.InvestmentPortfolio.WebApi/OV
 dotnet run --project "src/OVB.Demos.InvestmentPortfolio.WebApi/OVB.Demos.InvestmentPortfolio.WebApi.csproj"
 ```
 
+Agora para realizarmos a compilação e execução do Scheduler para Alerta via E-mail de Vencimento Próximo de Ativos financeiros, será necessário seguir as etapas seguintes:
+
+6. Instalar as dependências do npm
+
+```
+npm install -g azure-functions-core-tools@4
+```
+
+7. Executar a compilação e execução também do Function as a Service para Alerta do Vencimento Próximo de Ativos financeiros
+
+```
+cd "functions/OVB.Demos.InvestmentPortfolio.Scheduler/"
+func start
+```
 
 ### :rocket: Como utilizar a aplicação?
 

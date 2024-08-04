@@ -2,6 +2,7 @@
 using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Base.Interfaces;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.Repositories.Extensions;
+using OVB.Demos.InvestmentPortfolio.UnitTests.Domain.PortfolioContext;
 
 namespace OVB.Demos.InvestmentPortfolio.UnitTests.Application.Services.PortfolioContext.Fakes;
 
@@ -24,6 +25,9 @@ public sealed class FakerPortfolioRepository : IBaseRepository<Portfolio>, IExte
     {
         throw new NotImplementedException();
     }
+
+    public Task<Portfolio[]> QueryPortfoliosByCustomerIdAndPaginationIncludingFinancialAssetAsNoTrackingAsync(IdentityValueObject customerId, PageValueObject page, OffsetValueObject offset, CancellationToken cancellationToken)
+        => Task.FromResult((Portfolio[])[PortfolioDataTransferObjectValidationTests.PORTFLIO_EXAMPLE_TESTS]);
 
     public Task RemoveAsync(Portfolio entity, CancellationToken cancellationToken)
     {

@@ -17,7 +17,7 @@ public sealed class FinancialAssetRepository : BaseRepository<FinancialAsset>, I
         => _dataContext.Set<FinancialAsset>().Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
 
     public Task<FinancialAsset[]> QueryFinancialAssetAsNoTrackingByPaginationAsync(PageValueObject page, OffsetValueObject offset, CancellationToken cancellationToken)
-        => _dataContext.Set<FinancialAsset>().AsNoTracking().Skip(page.GetIndex()).Take(offset).ToArrayAsync(cancellationToken);
+        => _dataContext.Set<FinancialAsset>().AsNoTracking().Skip(page.GetIndex() * offset.GetOffset()).Take(offset).ToArrayAsync(cancellationToken);
 
     public Task<FinancialAsset[]> QueryFinancialAssetAsNoTrackingWhenExpirationDateIsLessThanExpectedDateIncludingOperatorsAsync(DateTime expirationDateExpected, CancellationToken cancellationToken)
         => _dataContext.Set<FinancialAsset>()
