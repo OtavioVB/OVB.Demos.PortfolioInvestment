@@ -37,7 +37,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OVB.Demos.InvestmentPortfol
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stress", "stress", "{0B48F93A-C9C9-4904-932B-3D7702F6C3B9}"
 	ProjectSection(SolutionItems) = preProject
-		tsts\stress\oauth_customer_authentication_stress_test.js = tsts\stress\oauth_customer_authentication_stress_test.js
+		tsts\stress\oauth_customer_authentication.js = tsts\stress\oauth_customer_authentication.js
+		tsts\stress\query_extract_financial_asset.js = tsts\stress\query_extract_financial_asset.js
+		tsts\stress\query_financial_assets.js = tsts\stress\query_financial_assets.js
+		tsts\stress\query_portfolios.js = tsts\stress\query_portfolios.js
 	EndProjectSection
 EndProject
 Global

@@ -9,6 +9,7 @@ using OVB.Demos.InvestmentPortfolio.Application.Services.PortfolioContext.Interf
 using OVB.Demos.InvestmentPortfolio.Application.UseCases.Interfaces;
 using OVB.Demos.InvestmentPortfolio.Application.UseCases.OrderContext.CreateOrder.Inputs;
 using OVB.Demos.InvestmentPortfolio.Application.UseCases.OrderContext.CreateOrder.Outputs;
+using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.OrderContext.Enumerators;
 using OVB.Demos.InvestmentPortfolio.Domain.Utils.MethodResultContext;
 using OVB.Demos.InvestmentPortfolio.Domain.Utils.NotificationContext.Interfaces;
 using OVB.Demos.InvestmentPortfolio.Infrascructure.EntityFrameworkCore.UnitOfWork.Interfaces;
@@ -70,7 +71,7 @@ public sealed class CreateOrderUseCase : IUseCase<CreateOrderUseCaseInput, Creat
                     input: CreateOrUpdatePortfolioServiceInput.Factory(
                         customerId: input.CustomerId,
                         financialAssetId: input.FinancialAssetId,
-                        quantity: input.Quantity,
+                        quantity: input.Type.GetOrderType() == OrderType.BUY ? input.Quantity : input.Quantity*-1,
                         unitaryPrice: createOrderServiceResult.Output.Order!.UnitaryPrice),
                     cancellationToken: cancellationToken);
 

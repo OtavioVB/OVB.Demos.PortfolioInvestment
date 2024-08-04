@@ -42,7 +42,7 @@ public sealed class PortfolioService : IPortfolioService
         var updatePortfolioItemsChangedResult = await _extensionPortfolioRepository.UpdatePortfolioQuantityAndTotalPriceInvestedAsync(
             financialAssetId: input.FinancialAssetId,
             customerId: input.CustomerId,
-            additionalQuantity: input.Quantity,
+            additionalQuantity:  input.Quantity,
             additionalPrice: additionalTotalPrice,
             cancellationToken: cancellationToken);
 

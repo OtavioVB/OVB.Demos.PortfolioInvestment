@@ -95,3 +95,7 @@ Ou, utilizar a documentação disponibilizada no swagger através do endpoint:
 ```
 https://localhost:5000/swagger/index.html
 ```
+
+### Relatório de Teste de Carga
+
+Você consegue obter informações de um pequeno e mínimo teste de carga realizado, através do arquivo em .xlsx disponibilizado com nome `RESULTADOS_TESTES_DE_CARGA.xlsx`.
