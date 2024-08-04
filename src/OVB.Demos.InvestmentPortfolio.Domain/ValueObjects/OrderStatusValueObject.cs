@@ -20,10 +20,12 @@ public readonly struct OrderStatusValueObject
     private const string ORDER_STATUS_IS_NOT_DEFINED_NOTIFICATION_CODE = "ORDER_STATUS_IS_NOT_DEFINED";
     private const string ORDER_STATUS_IS_NOT_DEFINED_NOTIFICATION_MESSAGE = "O status da ordem associada não é um suportado pelo enumerador da API.";
 
-    public static OrderStatusValueObject Factory(string extract)
+
+    public static OrderStatusValueObject EXECUTED => Factory("EXECUTED");
+    public static OrderStatusValueObject Factory(string orderStatus)
     {
         var isPossibleToConvertAsOrderStatusEnumerator = Enum.TryParse<OrderStatus>(
-            value: extract,
+            value: orderStatus,
             ignoreCase: false,
             result: out var typeOrder);
 

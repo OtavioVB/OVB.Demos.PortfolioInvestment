@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OVB.Demos.InvestmentPortfolio.Application.Services.CustomerContext;
+using OVB.Demos.InvestmentPortfolio.Application.Services.CustomerContext.Interfaces;
 using OVB.Demos.InvestmentPortfolio.Application.Services.FinancialAssetContext;
 using OVB.Demos.InvestmentPortfolio.Application.Services.FinancialAssetContext.Interfaces;
 using OVB.Demos.InvestmentPortfolio.Application.Services.OperatorContext;
@@ -32,6 +34,12 @@ public static class DependencyInjection
                 baseFinancialAssetRepository: serviceProvider.GetRequiredService<IBaseRepository<FinancialAsset>>(),
                 unitOfWork: serviceProvider.GetRequiredService<IUnitOfWork>(),
                 sendEmailApiKey: sendEmailApiKey));
+
+        serviceCollection.AddScoped<ICustomerService, CustomerService>((serviceProvider) 
+            => new CustomerService(
+                jwtBearerIssuerSigningKey: jwtBearerIssuerSigningKey,
+                passwordHashPrivateKey: passwordHashPrivateKey,
+                extensionCustomerRepository: serviceProvider.GetRequiredService<IExtensionCustomerRepository>()));
 
         #endregion
     }

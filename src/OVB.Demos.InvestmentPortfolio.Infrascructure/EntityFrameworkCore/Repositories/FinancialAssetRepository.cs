@@ -24,6 +24,14 @@ public sealed class FinancialAssetRepository : BaseRepository<FinancialAsset>, I
         .Where(p => p.ExpirationDate < expirationDateExpected)
         .ToArrayAsync(cancellationToken);
 
+    public Task UpdateFinancialAssetWithOrderSellProcessAync(IdentityValueObject financialAssetId, QuantityValueObject quantityWillSell, CancellationToken cancellationToken)
+        => _dataContext.Set<FinancialAsset>().Where(p => p.Id == financialAssetId).ExecuteUpdateAsync(p =>
+        p.SetProperty(q => q.QuantityAvailable, q => QuantityAvailableValueObject.Factory(q.QuantityAvailable + quantityWillSell)));
+
+    public Task<int> UpdateFinancialAssetIfBuyProcessQuantityIsGreaterThanTheMinimumAsync(IdentityValueObject financialAssetId, QuantityValueObject quantityWillBuy, CancellationToken cancellationToken)
+        => _dataContext.Set<FinancialAsset>().Where(p => p.Id == financialAssetId && (p.QuantityAvailable - quantityWillBuy) > 0).ExecuteUpdateAsync(p => 
+        p.SetProperty(q => q.QuantityAvailable, q => QuantityAvailableValueObject.Factory(q.QuantityAvailable - quantityWillBuy)));
+
     public Task<bool> VerifyFinancialAssetExistsBySymbolAsync(AssetSymbolValueObject symbol, CancellationToken cancellationToken)
         => _dataContext.Set<FinancialAsset>().AsNoTracking().Where(p => p.Symbol == symbol).AnyAsync(cancellationToken);
 }
