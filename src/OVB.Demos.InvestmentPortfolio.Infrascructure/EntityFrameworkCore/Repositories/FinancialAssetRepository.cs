@@ -25,13 +25,17 @@ public sealed class FinancialAssetRepository : BaseRepository<FinancialAsset>, I
         .Where(p => p.ExpirationDate < expirationDateExpected)
         .ToArrayAsync(cancellationToken);
 
-    public Task UpdateFinancialAssetWithOrderSellProcessAync(IdentityValueObject financialAssetId, QuantityValueObject quantityWillSell, CancellationToken cancellationToken)
-        => _dataContext.Set<FinancialAsset>().Where(p => p.Id == financialAssetId && p.Status.GetStatus() == FinancialAssetStatus.ACTIVE).ExecuteUpdateAsync(p =>
-        p.SetProperty(q => q.QuantityAvailable, q => QuantityAvailableValueObject.Factory(q.QuantityAvailable + quantityWillSell)));
+    public Task UpdateFinancialAssetWithOrderSellProcessAync(
+        IdentityValueObject financialAssetId, decimal quantityWillSell, CancellationToken cancellationToken)
+        => _dataContext.Database.ExecuteSqlAsync(
+            sql: $"UPDATE financial_asset.financial_assets SET quantity_available = quantity_available + {quantityWillSell} WHERE idfinancial_asset = {financialAssetId.GetIdentityAsString()} AND status = 'ACTIVE';",
+            cancellationToken: cancellationToken);
 
-    public Task<int> UpdateFinancialAssetIfBuyProcessQuantityIsGreaterThanTheMinimumAsync(IdentityValueObject financialAssetId, QuantityValueObject quantityWillBuy, CancellationToken cancellationToken)
-        => _dataContext.Set<FinancialAsset>().Where(p => p.Id == financialAssetId && (p.QuantityAvailable - quantityWillBuy) > 0 && p.Status.GetStatus() == FinancialAssetStatus.ACTIVE).ExecuteUpdateAsync(p => 
-        p.SetProperty(q => q.QuantityAvailable, q => QuantityAvailableValueObject.Factory(q.QuantityAvailable - quantityWillBuy)));
+    public Task<int> UpdateFinancialAssetIfBuyProcessQuantityIsGreaterThanTheMinimumAsync(
+        IdentityValueObject financialAssetId, decimal quantityWillBuy, CancellationToken cancellationToken)
+        => _dataContext.Database.ExecuteSqlAsync(
+            sql: $"UPDATE financial_asset.financial_assets SET quantity_available = quantity_available - {quantityWillBuy} WHERE idfinancial_asset = {financialAssetId.GetIdentityAsString()} AND status = 'ACTIVE' AND (quantity_available - {quantityWillBuy}) >= 0;",
+            cancellationToken: cancellationToken);
 
     public Task<bool> VerifyFinancialAssetExistsBySymbolAsync(AssetSymbolValueObject symbol, CancellationToken cancellationToken)
         => _dataContext.Set<FinancialAsset>().AsNoTracking().Where(p => p.Symbol == symbol).AnyAsync(cancellationToken);

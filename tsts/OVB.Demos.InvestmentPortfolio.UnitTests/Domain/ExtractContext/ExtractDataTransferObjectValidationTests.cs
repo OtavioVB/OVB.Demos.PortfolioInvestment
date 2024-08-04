@@ -44,7 +44,7 @@ public sealed class ExtractDataTransferObjectValidationTests
         Assert.Equal(type, extract.Type.GetExtractType());
         Assert.Equal(totalPrice, extract.TotalPrice.GetTotalPrice());
         Assert.Equal(unitaryPrice, extract.UnitaryPrice.GetUnitaryPrice());
-        Assert.Equal(quantity, extract.Quantity.GetQuantityAvailable());
+        Assert.Equal(quantity, extract.Quantity.GetQuantity());
         Assert.Equal(CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE, extract.Customer);
         Assert.Equal(FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE, extract.FinancialAsset);
     }

@@ -41,6 +41,8 @@ public sealed class ExtractService : IExtractService
             totalPrice: input.TotalPrice,
             unitaryPrice: input.UnitaryPrice,
             quantity: input.Quantity);
+        extract.CustomerId = input.CustomerId;
+        extract.FinancialAssetId = input.FinancialAssetId;
 
         await _extractBaseRepository.AddAsync(extract, cancellationToken);
 

@@ -78,7 +78,8 @@ public sealed class OrderService : IOrderService
             return MethodResult<INotification, CreateOrderServiceOutput>.FactorySuccess(
                 notifications: [Notification.FactorySuccess(
                     code: CREATE_ORDER_BUY_DONE_NOTIFICATION_CODE,
-                    message: CREATE_ORDER_BUY_DONE_NOTIFICATION_MESSAGE)]);
+                    message: CREATE_ORDER_BUY_DONE_NOTIFICATION_MESSAGE)],
+                output: CreateOrderServiceOutput.Factory(order));
         }
         else
         {
@@ -110,7 +111,8 @@ public sealed class OrderService : IOrderService
             return MethodResult<INotification, CreateOrderServiceOutput>.FactorySuccess(
                 notifications: [Notification.FactorySuccess(
                     code: CREATE_ORDER_SELL_DONE_NOTIFICATION_CODE,
-                    message: CREATE_ORDER_SELL_DONE_NOTIFICATION_MESSAGE)]);
+                    message: CREATE_ORDER_SELL_DONE_NOTIFICATION_MESSAGE)],
+                output: CreateOrderServiceOutput.Factory(order));
         }
     }
 }

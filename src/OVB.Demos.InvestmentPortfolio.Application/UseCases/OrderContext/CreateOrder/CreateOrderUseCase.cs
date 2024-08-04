@@ -100,5 +100,5 @@ public sealed class CreateOrderUseCase : IUseCase<CreateOrderUseCaseInput, Creat
                         financialAsset: financialAssetServiceResult.Output.FinancialAsset)));
             },
             cancellationToken: cancellationToken,
-            isolationLevel: IsolationLevel.ReadUncommitted);
+            isolationLevel: IsolationLevel.Serializable);
 }

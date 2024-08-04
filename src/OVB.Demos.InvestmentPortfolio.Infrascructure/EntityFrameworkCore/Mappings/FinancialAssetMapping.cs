@@ -80,7 +80,7 @@ public sealed class FinancialAssetMapping : IEntityTypeConfiguration<FinancialAs
             .HasColumnType("VARCHAR")
             .HasColumnName("description")
             .HasMaxLength(DescriptionValueObject.MAX_LENGTH)
-            .HasConversion(p => p.Value.GetDescription(), p => DescriptionValueObject.Factory(p))
+            .HasConversion(p => p != null ? p!.Value.GetDescription() : null, p => DescriptionValueObject.Factory(p))
             .ValueGeneratedNever();
         builder.Property(p => p.ExpirationDate)
             .IsRequired(true)

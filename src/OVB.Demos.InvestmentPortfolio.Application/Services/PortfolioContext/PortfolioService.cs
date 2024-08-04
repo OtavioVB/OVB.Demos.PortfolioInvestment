@@ -54,6 +54,8 @@ public sealed class PortfolioService : IPortfolioService
                 id: portfolioId,
                 totalPrice: additionalTotalPrice,
                 quantity: input.Quantity);
+            portfolio.CustomerId = input.CustomerId;
+            portfolio.FinancialAssetId = input.FinancialAssetId;
 
             await _basePortfolioRepository.AddAsync(portfolio, cancellationToken);
         }

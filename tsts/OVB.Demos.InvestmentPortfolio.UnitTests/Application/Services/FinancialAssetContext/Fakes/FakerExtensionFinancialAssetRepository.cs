@@ -50,6 +50,16 @@ public sealed class FakerExtensionFinancialAssetRepository : IBaseRepository<Fin
     public Task UpdateAsync(FinancialAsset entity, CancellationToken cancellationToken)
         => Task.CompletedTask;
 
+    public Task<int> UpdateFinancialAssetIfBuyProcessQuantityIsGreaterThanTheMinimumAsync(IdentityValueObject financialAssetId, QuantityValueObject quantityWillBuy, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task UpdateFinancialAssetWithOrderSellProcessAync(IdentityValueObject financialAssetId, QuantityValueObject quantityWillSell, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task UpdateRangeAsync(FinancialAsset[] entities, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();

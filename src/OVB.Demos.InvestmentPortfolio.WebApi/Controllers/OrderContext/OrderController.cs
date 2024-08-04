@@ -18,7 +18,7 @@ public sealed class OrderController : ControllerBase
     [HttpPost]
     [Consumes(MediaTypeNames.Application.Json)]
     [Route("{financialAssetId}/orders/{orderType}")]
-    [Authorize(nameof(Customer))]
+    [Authorize(Roles = nameof(Customer))]
     public async Task<IActionResult> HttpPostCreateOrderAsync(
         [FromServices] IUseCase<CreateOrderUseCaseInput, CreateOrderUseCaseOutput> useCase,
         [FromRoute] Guid financialAssetId,
