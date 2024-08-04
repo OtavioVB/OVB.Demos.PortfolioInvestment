@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\OrderContext\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\OVB.Demos.InvestmentPortfolio.Domain\OVB.Demos.InvestmentPortfolio.Domain.csproj" />
     <ProjectReference Include="..\OVB.Demos.InvestmentPortfolio.Infrascructure\OVB.Demos.InvestmentPortfolio.Infrascructure.csproj" />
   </ItemGroup>
