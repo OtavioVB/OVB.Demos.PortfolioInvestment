@@ -29,7 +29,7 @@ public sealed class PortfolioService : IPortfolioService
     }
 
     public async Task<MethodResult<INotification>> CreateOrUpdatePortfolioServiceAsync(
-        CreatePortfolioServiceInput input, 
+        CreateOrUpdatePortfolioServiceInput input, 
         CancellationToken cancellationToken)
     {
         var inputValidationResult = input.GetInputValidationResult();

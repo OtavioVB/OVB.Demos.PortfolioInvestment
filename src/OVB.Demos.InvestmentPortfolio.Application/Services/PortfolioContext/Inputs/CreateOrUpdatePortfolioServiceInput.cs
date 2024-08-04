@@ -4,14 +4,14 @@ using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 
 namespace OVB.Demos.InvestmentPortfolio.Application.Services.PortfolioContext.Inputs;
 
-public readonly struct CreatePortfolioServiceInput
+public readonly struct CreateOrUpdatePortfolioServiceInput
 {
     public IdentityValueObject CustomerId { get; }
     public IdentityValueObject FinancialAssetId { get; }
     public QuantityValueObject Quantity { get; }
     public UnitaryPriceValueObject UnitaryPrice { get; }
 
-    private CreatePortfolioServiceInput(IdentityValueObject customerId, IdentityValueObject financialAssetId, QuantityValueObject quantity, UnitaryPriceValueObject unitaryPrice)
+    private CreateOrUpdatePortfolioServiceInput(IdentityValueObject customerId, IdentityValueObject financialAssetId, QuantityValueObject quantity, UnitaryPriceValueObject unitaryPrice)
     {
         CustomerId = customerId;
         FinancialAssetId = financialAssetId;
@@ -19,7 +19,7 @@ public readonly struct CreatePortfolioServiceInput
         UnitaryPrice = unitaryPrice;
     }
 
-    public static CreatePortfolioServiceInput Factory(IdentityValueObject customerId, IdentityValueObject financialAssetId, QuantityValueObject quantity,
+    public static CreateOrUpdatePortfolioServiceInput Factory(IdentityValueObject customerId, IdentityValueObject financialAssetId, QuantityValueObject quantity,
         UnitaryPriceValueObject unitaryPrice)
         => new(customerId, financialAssetId, quantity, unitaryPrice);
 

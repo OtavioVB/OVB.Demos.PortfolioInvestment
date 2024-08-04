@@ -1,4 +1,5 @@
 ﻿using OVB.Demos.InvestmentPortfolio.Domain.BoundedContexts.PortfolioContext.DataTransferObject;
+using OVB.Demos.InvestmentPortfolio.Domain.ValueObjects;
 using OVB.Demos.InvestmentPortfolio.UnitTests.Domain.CustomerContext;
 using OVB.Demos.InvestmentPortfolio.UnitTests.Domain.FinancialAssetContext;
 
@@ -6,6 +7,15 @@ namespace OVB.Demos.InvestmentPortfolio.UnitTests.Domain.PortfolioContext;
 
 public sealed class PortfolioDataTransferObjectValidationTests
 {
+    public static Portfolio PORTFLIO_EXAMPLE_TESTS = new Portfolio(
+        id: IdentityValueObject.Factory(),
+        totalPrice: 3 * FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE.UnitaryPrice,
+        quantity: 3)
+    {
+        CustomerId = CustomerDataTransferObjectValidationTests.CUSTOMER_EXAMPLE.Id,
+        FinancialAssetId = FinancialAssetDataTransferObjectValidationTests.FINANCIAL_ASSET_EXAMPLE.Id
+    };
+
     [Theory]
     [InlineData(15, 3)]
     public void Portfolio_Data_Transfer_Object_Should_Be_Equal_Expected(decimal totalPrice, decimal quantity)

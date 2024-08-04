@@ -67,7 +67,7 @@ public sealed class CreateOrderUseCase : IUseCase<CreateOrderUseCaseInput, Creat
                         notifications: createOrderServiceResult.Notifications));
 
                 var createOrUpdatePortfolioServiceResult = await _portfolioService.CreateOrUpdatePortfolioServiceAsync(
-                    input: CreatePortfolioServiceInput.Factory(
+                    input: CreateOrUpdatePortfolioServiceInput.Factory(
                         customerId: input.CustomerId,
                         financialAssetId: input.FinancialAssetId,
                         quantity: input.Quantity,

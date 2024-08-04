@@ -2,15 +2,15 @@
 
 namespace OVB.Demos.InvestmentPortfolio.Application.Services.PortfolioContext.Outputs;
 
-public readonly struct CreatePortfolioServiceOutput
+public readonly struct CreateOrUpdatePortfolioServiceOutput
 {
     public Portfolio Portfolio { get; }
 
-    private CreatePortfolioServiceOutput(Portfolio portfolio)
+    private CreateOrUpdatePortfolioServiceOutput(Portfolio portfolio)
     {
         Portfolio = portfolio;
     }
 
-    public static CreatePortfolioServiceOutput Factory(Portfolio portfolio)
+    public static CreateOrUpdatePortfolioServiceOutput Factory(Portfolio portfolio)
         => new(portfolio);
 }

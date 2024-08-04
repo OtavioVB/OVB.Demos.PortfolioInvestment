@@ -8,6 +8,6 @@ namespace OVB.Demos.InvestmentPortfolio.Application.Services.PortfolioContext.In
 public interface IPortfolioService
 {
     public Task<MethodResult<INotification>> CreateOrUpdatePortfolioServiceAsync(
-        CreatePortfolioServiceInput input,
+        CreateOrUpdatePortfolioServiceInput input,
         CancellationToken cancellationToken);
 }
